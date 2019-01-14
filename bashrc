@@ -6,15 +6,20 @@ ok() {
   if which $1 > /dev/null; then 
     true 
   else 
-    sudo apt-get -y install $2
+    echo sudo apt-get -y install ${2:-$1}
+    sudo apt-get -y install ${2:-$1}
   fi
 }
 
-ok clisp clisp
-ok tmux  tmux
+ok mc
+ok tmux  
+ok ncdu
+ok htop
+ok clisp 
+ok ranger
 ok lua   lua5.2
-ok swipl swi-prolog
 ok gst   gnu-smalltalk
+ok swipl swi-prolog
 
 for f in $Files; do
   g=$HOME/workspace/$f
