@@ -41,4 +41,4 @@ PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";P
 
 alias ll='ls -GF'
 alias get='git pull'
-alias put='git commit -am saving; git pull; git status'
+alias put='git commit -am saving; git push; git status'
