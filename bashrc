@@ -6,7 +6,9 @@ ok() {
   if which $1 > /dev/null; then 
     true 
   else 
-    echo sudo apt-get -y install ${2:-$1}
+    echo ""
+    echo "# ----| $1 |--------------------------------"
+    echo ""
     sudo apt-get -y install ${2:-$1}
   fi
 }
@@ -17,6 +19,7 @@ ok ncdu
 ok htop
 ok clisp 
 ok ranger
+ok cmatrix
 ok lua   lua5.2
 ok gst   gnu-smalltalk
 ok swipl swi-prolog
@@ -47,3 +50,4 @@ PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";P
 alias ll='ls -GF'
 alias get='git pull'
 alias put='git commit -am saving; git push; git status'
+alias gc="git config credential.helper 'cache --timeout=3600'"
