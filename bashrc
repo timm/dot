@@ -1,13 +1,37 @@
 mkdir -p $HOME/tmp
 
-Files="bashrc gitignore tmux.conf vimrc"
+Files="bashrc tmux.conf gitignore vimrc"
+
+ok() {
+  if which $1 > /dev/null; then 
+    true 
+  else 
+    echo ""
+    echo "# ----| $1 |--------------------------------"
+    echo ""
+    sudo apt-get -y install ${2:-$1}
+  fi
+}
+
+ok mc
+ok tree  
+ok tmux  
+ok ncdu
+ok htop
+ok clisp 
+ok ranger
+ok cmatrix
+ok lua    lua5.2
+ok gst    gnu-smalltalk
+ok swipl  swi-prolog
+ok robots bsdgames
 
 for f in $Files; do
   g=$HOME/workspace/$f
   h=$HOME/.$f
-  echo "g $g h $h"
   if [ -f "$g" ]; then
     if [ ! -f "$h" ]; then 
+      echo "# $h"
       ln -sf $g $h 
     fi 
   fi
@@ -23,8 +47,9 @@ _c7="[\033]01;19\]"
 
 here() { cd $1; basename "$PWD"; }
 
-PROMPT_COMMAND='echo -ne "${_c6}> \033]0;$(here ../..)/$(here ..)/$(here .)\007";PS1="${_c1}$(here ../..)/$_c2$(here ..)/$_c3$(here .) ${_c6}\!>${_c0}\e[m "'
+PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";PS1="${_c1}$(here ../..)/$_c2$(here ..)/$_c3$(here .) ${_c6}\!>${_c0}\e[m "'
 
 alias ll='ls -GF'
 alias get='git pull'
-alias put='git commit -am saving; git pull; git status'
+alias put='git commit -am saving; git push; git status'
+alias gc="git config credential.helper 'cache --timeout=3600'"
