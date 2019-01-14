@@ -22,9 +22,9 @@ set title
 set visualbell
 set number
 "syntax on 
-set fillchars+=vert:\
+"set fillchars+=vert:\
 colorscheme torte
-hi VertSplit guifg=#202020 guibg=#202020 gui=NONE ctermfg=DarkGray ctermbg=DarkGray cterm=NONE
+"hi VertSplit guifg=#202020 guibg=#202020 gui=NONE ctermfg=DarkGray ctermbg=DarkGray cterm=NONE
 set paste
 
 if has("mouse_sgr")
