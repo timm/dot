@@ -2,12 +2,18 @@ mkdir -p $HOME/tmp
 
 Files="bashrc gitignore tmux.conf vimrc"
 
+if which lua   > /dev/null; then true; else sudo apt-get -y install lua5.2; fi
+if which clisp > /dev/null; then true; else sudo apt-get -y install clisp; fi
+if which tmux  > /dev/null; then true; else sudo apt-get -y install tmux; fi
+if which swipl > /dev/null; then true; else sudo apt-get -y install swi-prolog; fi
+if which gst   > /dev/null; then true; else sudo apt-get -y install gnu-smalltalk; fi
+
 for f in $Files; do
   g=$HOME/workspace/$f
   h=$HOME/.$f
-  echo "g $g h $h"
   if [ -f "$g" ]; then
     if [ ! -f "$h" ]; then 
+      echo "# $h"
       ln -sf $g $h 
     fi 
   fi
