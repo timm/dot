@@ -1,5 +1,18 @@
 mkdir -p $HOME/tmp
 
+Files="bashrc gitignore tmux.conf vimrc"
+
+for f in $Files; do
+  g=$HOME/workspace/$f
+  h=$HOME/.$f
+  echo "g $g h $h"
+  if [ -f "$g" ]; then
+    if [ ! -f "$h" ]; then 
+      ln -sf $g $h 
+    fi 
+  fi
+done
+
 _c1="\[\033[01;32m\]"
 _c2="\[\033[01;34m\]"
 _c3="\[\033[31m\]"
