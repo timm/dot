@@ -14,15 +14,17 @@ ok() {
 }
 
 ok mc
+ok tree  
 ok tmux  
 ok ncdu
 ok htop
 ok clisp 
 ok ranger
 ok cmatrix
-ok lua   lua5.2
-ok gst   gnu-smalltalk
-ok swipl swi-prolog
+ok lua    lua5.2
+ok gst    gnu-smalltalk
+ok swipl  swi-prolog
+ok robots bsdgames
 
 for f in $Files; do
   g=$HOME/workspace/$f
