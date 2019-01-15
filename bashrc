@@ -26,6 +26,14 @@ ok gst    gnu-smalltalk
 ok swipl  swi-prolog
 ok robots bsdgames
 
+vim8() {
+  echo "Vim8 update. Takes about a minute."
+  read -t 10 -p "Continue? [Cnt-C to abort]"
+  sudo add-apt-repository ppa:jonathonf/vim
+  sudo apt update
+  sudo apt-get  upgrade vim
+}
+
 for f in $Files; do
   g=$HOME/workspace/$f
   h=$HOME/.$f
