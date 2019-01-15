@@ -1,5 +1,6 @@
 mkdir -p $HOME/tmp
 
+DOT="$HOME/gits/timm/dot"
 Files="bashrc tmux.conf gitignore vimrc"
 
 ok() {
@@ -33,6 +34,12 @@ vim8() {
   sudo apt update
   sudo apt-get  upgrade vim
 }
+add2bash() {
+  LINE=". $DOT/bashrc"
+  FILE=$HOME/.bashrc
+  grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+}
+add2bash
 
 for f in $Files; do
   g=$HOME/workspace/$f
