@@ -27,7 +27,12 @@ ok gst    gnu-smalltalk
 ok swipl  swi-prolog
 ok robots bsdgames
 
-vim8() {
+bat0() {
+  wget https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
+  sudo dpkg -i bat_0.9.0_amd64.deb
+  rm  bat_0.9.0_amd64.deb
+}
+vim0() {
   echo "Vim8 update. Takes about a minute."
   read -t 10 -p "Continue? [Cnt-C to abort]"
   sudo add-apt-repository ppa:jonathonf/vim
