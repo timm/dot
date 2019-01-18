@@ -75,3 +75,4 @@ alias ll='ls -GF'
 alias get='git pull'
 alias put='git commit -am saving; git push; git status'
 alias gc="git config credential.helper 'cache --timeout=3600'"
+alias vi=vim
