@@ -4,6 +4,7 @@ mkdir -p $HOME/tmp
 
 DOT="$HOME/gits/timm/dot"
 Files="bashrc tmux.conf gitignore vimrc"
+GITS="$HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*"
 
 ok() {
   if which $1 > /dev/null; then 
@@ -66,7 +67,7 @@ for f in $Files; do
   fi
 done
 saves() {
-  for d in $HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*; do
+  for d in $GITS; do
     if [ -d "$d" ]; then
       printf "\n#---| $d |-----------\n"
       (cd $d
