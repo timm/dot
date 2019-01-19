@@ -47,7 +47,7 @@ vim0() { # optionally, get the latest version of vim
   sudo apt update
   sudo apt-get upgrade vim
 }
-puts() { # push all changes to all github repos
+puts() { # push all unsaved changes in all github repos
   for d in $GITS; do
     if [ -d "$d" ]; then
       printf "\n${Yellow}#---| $d |-----------${White}\n"
