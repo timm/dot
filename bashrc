@@ -29,7 +29,7 @@ _ok() { # internal: install if not installed
     sudo apt-get -y install ${2:-$1}
   fi
 }
-_clean() { # reclaim as much hard drive as you can
+clean() { # optinally, reclaim as much hard drive as you can
   sudo apt autoclean
   sudo apt-get clean
   sudo apt autoremove
@@ -46,7 +46,6 @@ vim0() { # optionally, get the latest version of vim
   sudo add-apt-repository ppa:jonathonf/vim
   sudo apt update
   sudo apt-get upgrade vim
-  _clean
 }
 puts() { # push all changes to all github repos
   for d in $GITS; do
@@ -88,7 +87,7 @@ _ok lua    lua5.2
 _ok gst    gnu-smalltalk
 _ok swipl  swi-prolog
 _ok robots bsdgames
-_clean # call this after the above installs
+# call this after the above installs
 
 # ensure certain $HOME/.dotfiles exists
 for f in $Files; do
