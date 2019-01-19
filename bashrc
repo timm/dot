@@ -24,7 +24,7 @@ ok() {
     true 
   else 
     echo ""
-    echo "${Yellow}# ----| $1 |--------------------------------${White}"
+    echo -e "${Yellow}# ----| $1 |--------------------------------${White}"
     echo ""
     sudo apt-get -y install ${2:-$1}
   fi
