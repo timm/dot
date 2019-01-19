@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# testing
 mkdir -p $HOME/tmp
 
 DOT="$HOME/gits/timm/dot"
@@ -27,6 +29,11 @@ ok gst    gnu-smalltalk
 ok swipl  swi-prolog
 ok robots bsdgames
 
+clean() {
+  sudo apt autoclean
+  sudo apt-get clean
+  sudo apt autoremove
+}
 bat0() {
   cd $HOME/tmp
   wget -nc https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
@@ -38,8 +45,8 @@ vim0() {
   read -t 10 -p "Continue? [Cnt-C to abort]"
   sudo add-apt-repository ppa:jonathonf/vim
   sudo apt update
-  sudo apt-get  upgrade vim
-  sudo apt autoremove
+  sudo apt-get upgrade vim
+  clean
 }
 add2bash() {
   LINE=". $DOT/bashrc"
@@ -58,7 +65,17 @@ for f in $Files; do
     fi 
   fi
 done
-
+saves() {
+  for d in $HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*; do
+    if [ -d "$d" ]; then
+      printf "\n#---| $d |-----------\n"
+      (cd $d
+      if [[ -n $(git status -s) ]]; then
+         git commit -am saving; git push; git status
+      fi)
+    fi
+  done
+}
 _c1="\[\033[01;32m\]"
 _c2="\[\033[01;34m\]"
 _c3="\[\033[31m\]"
