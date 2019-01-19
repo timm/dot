@@ -6,12 +6,25 @@ DOT="$HOME/gits/timm/dot"
 Files="bashrc tmux.conf gitignore vimrc"
 GITS="$HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*"
 
+White="\033[00m"
+Green="\033[01;32m"
+Blue="\033[01;34m"
+Yellow="\033[33m"
+
+_c1="\[$Green\]"
+_c2="\[$Blue\]"
+_c3="\[\033[31m\]"
+_c6="$Yellow"
+_c5="\[\033[35m\]$"
+_c0="\[${White}\]"
+_c7="[\033]01;19\]"
+
 ok() {
   if which $1 > /dev/null; then 
     true 
   else 
     echo ""
-    echo "# ----| $1 |--------------------------------"
+    echo "${Yellow}# ----| $1 |--------------------------------${White}"
     echo ""
     sudo apt-get -y install ${2:-$1}
   fi
@@ -42,7 +55,7 @@ bat0() {
   rm  bat_0.9.0_amd64.deb
 }
 vim0() {
-  echo "Vim8 update. Takes about a minute."
+  echo -e "${Yellow}Vim8 update. Takes about a minute.${White}"
   read -t 10 -p "Continue? [Cnt-C to abort]"
   sudo add-apt-repository ppa:jonathonf/vim
   sudo apt update
@@ -69,21 +82,13 @@ done
 saves() {
   for d in $GITS; do
     if [ -d "$d" ]; then
-      printf "\n#---| $d |-----------\n"
+      printf "\n${Yellow}#---| $d |-----------${White}\n"
       (cd $d
       git commit -am saving; git  push
       )
     fi
   done
 }
-_c1="\[\033[01;32m\]"
-_c2="\[\033[01;34m\]"
-_c3="\[\033[31m\]"
-_c6="\033[33m"
-_c5="\[\033[35m\]$"
-_c0="\[\033[00m\]"
-_c7="[\033]01;19\]"
-
 here() { cd $1; basename "$PWD"; }
 
 PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";PS1="${_c1}$(here ../..)/$_c2$(here ..)/$_c3$(here .) ${_c6}\!>${_c0}\e[m "'
