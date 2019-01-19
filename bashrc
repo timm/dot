@@ -7,18 +7,20 @@ GITS="$HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*"
 
 # colors
 White="\033[00m"
-Green="\033[01;32m"
-Blue="\033[01;34m"
-Yellow="\033[33m"
 Red="\033[31m"
+Green="\033[01;32m"
+Yellow="\033[33m"
+Blue="\033[01;34m"
+Purple="\033[35m$"
+Turquoise="\033[36m$"
 
+_c0="\[${White}\]"
 _c1="\[$Green\]"
 _c2="\[$Blue\]"
 _c3="\[$Red\]"
+_c5="\[$Purple\]$"
 _c6="$Yellow"
-_c5="\[\033[35m\]$"
-_c0="\[${White}\]"
-_c7="[\033]01;19\]"
+_c7="$Turquoise"
 
 _ok() { # internal: install if not installed
   if which $1 > /dev/null; then 
