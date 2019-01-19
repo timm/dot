@@ -70,7 +70,7 @@ saves() {
     if [ -d "$d" ]; then
       printf "\n#---| $d |-----------\n"
       (cd $d
-      git commit -am saving; git -q push
+      git commit -am saving; git  push
       )
     fi
   done
