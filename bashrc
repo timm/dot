@@ -71,12 +71,16 @@ here() { cd $1; basename "$PWD"; }
 
 PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";PS1="${_c1}$(here ../..)/$_c2$(here ..)/$_c3$(here .) ${_c6}\!>${_c0}\e[m "'
 
+##########################
 # useful aliases
 alias ll='ls -GF'
 alias get='git pull'
 alias put='git commit -am saving; git push; git status'
 alias gc="git config credential.helper 'cache --timeout=3600'"
 alias vi=vim
+
+##########################
+#### start up
 
 # create my usual dirs
 mkdir -p $HOME/tmp
@@ -94,7 +98,7 @@ _ok lua    lua5.2
 _ok gst    gnu-smalltalk
 _ok swipl  swi-prolog
 _ok robots bsdgames
-# call this after the above installs
+# call 'clean'  after the above installs
 
 # ensure certain $HOME/.dotfiles exists
 for f in $Files; do

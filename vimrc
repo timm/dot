@@ -64,5 +64,5 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
 
-colorscheme torte
+set background=dark    " Setting dark mode
 colorscheme gruvbox
