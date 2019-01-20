@@ -15,6 +15,13 @@ _Solution:_
 
 After that, it should just all work, everytime you log in.
 
+## Internals
+
+- Bash config attached to `dot/bashrc`
+     - Offers many services including the _Extras_ shown below.
+- Vim config files linked to `dot/vimrc`
+     - Also, Vim package manager enabled.
+- Tmux config files linked to `dot/tmux.conf`
 
 ## Extras
 
