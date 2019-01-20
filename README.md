@@ -21,7 +21,16 @@ After that, it should just all work, everytime you log in.
      - Offers many services including the _Extras_ shown below.
 - Vim config files linked to `dot/vimrc`
      - Also, Vim package manager enabled.
+     - Mouse support enabled
+     - Long list of colorschemes installed
+     - Nerdtree file browser installed
+     - And other tricks as well
 - Tmux config files linked to `dot/tmux.conf`
+     - Mouse support enabled
+     - Prefix set to "control-space"
+     - Vertical split set to "control-space |"
+     - Horizontal  split set to "control-space _"
+     - Fast pane navigation enables with alt-arrow
 
 ## Extras
 
