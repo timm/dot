@@ -41,6 +41,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tbastos/vim-lua'
+Plugin 'scrooloose/vim-fugitive'
 
 call vundle#end()
 filetype plugin indent on
