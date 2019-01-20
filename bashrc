@@ -49,6 +49,10 @@ vim0() { # optionally, get the latest version of vim
   sudo add-apt-repository ppa:jonathonf/vim
   sudo apt update
   sudo apt-get upgrade vim
+  if [ ! -d "$HOME/.vim/bundle" ]; then
+     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+     vim +PluginInstall +qall 
+  fi
 }
 puts() { # push all unsaved changes in all github repos
   for d in $GITS; do

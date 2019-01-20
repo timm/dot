@@ -32,3 +32,25 @@ if has("mouse_sgr")
 else
     set ttymouse=xterm2
 end
+
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tbastos/vim-lua'
+
+call vundle#end()
+filetype plugin indent on
+
+autocmd vimenter * NERDTree 
+autocmd VimEnter * wincmd w
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
