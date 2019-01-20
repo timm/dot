@@ -20,7 +20,7 @@ set splitbelow
 "set syntax=on
 set title
 set visualbell
-set number
+"set number
 "syntax on 
 "set fillchars+=vert:\
 "colorscheme torte
