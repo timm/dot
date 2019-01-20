@@ -23,7 +23,8 @@ set visualbell
 set number
 "syntax on 
 "set fillchars+=vert:\
-colorscheme torte
+"colorscheme torte
+"colorscheme default
 "hi VertSplit guifg=#202020 guibg=#202020 gui=NONE ctermfg=DarkGray ctermbg=DarkGray cterm=NONE
 set paste
 
@@ -42,6 +43,13 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tbastos/vim-lua'
 Plugin 'scrooloose/vim-fugitive'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'soli/prolog-vim'
+"Plugin 'valloric/youcompleteme'
+
+" Gruvbox
+" Molokai
+" Inkpot
 
 call vundle#end()
 filetype plugin indent on
@@ -55,3 +63,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
+
+colorscheme torte
+colorscheme gruvbox
