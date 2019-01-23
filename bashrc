@@ -5,6 +5,25 @@ DOT="$HOME/gits/timm/dot"
 Files="bashrc tmux.conf gitignore vimrc"
 GITS="$HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*"
 
+want() {
+	got mc
+	got tree  
+	got tmux  
+	got ncdu
+	got htop
+	got clisp 
+	got aspell
+	got ranger
+	got cmatrix
+	got lua    lua5.2
+	got gst    gnu-smalltalk
+	got swipl  swi-prolog
+	got robots bsdgames
+}
+
+# end config
+# ######################################################
+
 # colors
 White="\033[00m"
 Red="\033[31m"
@@ -22,7 +41,7 @@ _c5="\[$Purple\]$"
 _c6="$Yellow"
 _c7="$Turquoise"
 
-_ok() { # internal: install if not installed
+got() { # internal: install if not installed
   if which $1 > /dev/null; then 
     true 
   else 
@@ -86,19 +105,8 @@ alias vi=vim
 mkdir -p $HOME/tmp
 
 # install stuff if it aint already there
-_ok mc
-_ok tree  
-_ok tmux  
-_ok ncdu
-_ok htop
-_ok clisp 
-_ok ranger
-_ok cmatrix
-_ok lua    lua5.2
-_ok gst    gnu-smalltalk
-_ok swipl  swi-prolog
-_ok robots bsdgames
 # call 'clean'  after the above installs
+want
 
 # ensure certain $HOME/.dotfiles exists
 for f in $Files; do
