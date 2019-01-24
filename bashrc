@@ -56,6 +56,11 @@ clean() { # optinally, reclaim as much hard drive as you can
   sudo apt-get clean
   sudo apt autoremove
 }
+aclock0() {
+  (cd $HOME/bin
+  wget -O aclock 'https://github.com/tenox7/aclock/blob/master/binaries/x86/aclock-i386-linux2?raw=true'
+  chmod +x aclock)
+}
 bat0() { # optinally, install the very cool "bat" replacement for "cat"
   cd $HOME/tmp
   wget -nc https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
@@ -102,7 +107,7 @@ alias vi=vim
 #### start up
 
 # create my usual dirs
-mkdir -p $HOME/tmp
+mkdir -p $HOME/tmp $HOME/bin
 
 # install stuff if it aint already there
 # call 'clean'  after the above installs
