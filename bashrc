@@ -15,6 +15,7 @@ want() {
 	got aspell
 	got ranger
 	got cmatrix
+        got tty-clock
 	got lua    lua5.2
 	got gst    gnu-smalltalk
 	got swipl  swi-prolog
@@ -55,11 +56,6 @@ clean() { # optinally, reclaim as much hard drive as you can
   sudo apt autoclean
   sudo apt-get clean
   sudo apt autoremove
-}
-aclock0() {
-  (cd $HOME/bin
-  wget -O aclock 'https://github.com/tenox7/aclock/blob/master/binaries/x86/aclock-i386-linux2?raw=true'
-  chmod +x aclock)
 }
 bat0() { # optinally, install the very cool "bat" replacement for "cat"
   cd $HOME/tmp
