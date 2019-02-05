@@ -41,6 +41,17 @@ _c5="\[$Purple\]$"
 _c6="$Yellow"
 _c7="$Turquoise"
 
+machine() {
+	box="$(uname -s)"
+	case "${unameOut}" in
+	    Linux*)     box=Linux;;
+	    Darwin*)    box=Mac;;
+	    CYGWIN*)    box=Cygwin;;
+	    MINGW*)     box=MinGw;;
+	    *)          box="UNKNOWN:${unameOut}"
+	esac
+	echo ${box}
+}
 got() { # internal: install if not installed
   if which $1 > /dev/null; then 
     true 
@@ -48,7 +59,10 @@ got() { # internal: install if not installed
     echo ""
     echo -e "${Yellow}# ----| $1 |--------------------------------${White}"
     echo ""
-    sudo apt-get -y install ${2:-$1}
+    machine
+    if [ "$box" == "Linux" ]; then
+      sudo apt-get -y install ${2:-$1}
+    fi
   fi
 }
 clean() { # optinally, reclaim as much hard drive as you can
@@ -123,4 +137,5 @@ done
 # ensure $HOME/.bashrc loads this file
 LINE=". $DOT/bashrc"
 FILE=$HOME/.bashrc
+if [ ! -f "$FILE" ]; then touch $FILE; fi
 grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
