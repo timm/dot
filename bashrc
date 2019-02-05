@@ -15,6 +15,7 @@ want() {
 	got aspell
 	got ranger
 	got cmatrix
+        got tty-clock
 	got lua    lua5.2
 	got gst    gnu-smalltalk
 	got swipl  swi-prolog
@@ -106,17 +107,20 @@ PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";P
 
 ##########################
 # useful aliases
+alias vi=vim
 alias ll='ls -GF'
 alias get='git pull'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 alias put='git commit -am saving; git push; git status'
 alias gc="git config credential.helper 'cache --timeout=3600'"
-alias vi=vim
 
 ##########################
 #### start up
 
 # create my usual dirs
-mkdir -p $HOME/tmp
+mkdir -p $HOME/tmp $HOME/bin
 
 # install stuff if it aint already there
 # call 'clean'  after the above installs
