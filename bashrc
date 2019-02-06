@@ -15,13 +15,13 @@ want() {
 	got aspell
 	got ranger
 	got cmatrix
-        got tty-clock
 	got lua    lua5.2
 	got gst    gnu-smalltalk
 	got swipl  swi-prolog
+}
+like() {
 	got robots bsdgames
 }
-
 # end config
 # ######################################################
 
@@ -42,17 +42,15 @@ _c5="\[$Purple\]$"
 _c6="$Yellow"
 _c7="$Turquoise"
 
-machine() {
-	box="$(uname -s)"
-	case "${unameOut}" in
-	    Linux*)     box=Linux;;
-	    Darwin*)    box=Mac;;
-	    CYGWIN*)    box=Cygwin;;
-	    MINGW*)     box=MinGw;;
-	    *)          box="UNKNOWN:${unameOut}"
-	esac
-	echo ${box}
-}
+box="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     box=Linux;;
+    Darwin*)    box=Mac;;
+    CYGWIN*)    box=Cygwin;;
+    MINGW*)     box=MinGw;;
+    *)          box="UNKNOWN:${unameOut}"
+esac
+
 got() { # internal: install if not installed
   if which $1 > /dev/null; then 
     true 
@@ -63,6 +61,9 @@ got() { # internal: install if not installed
     machine
     if [ "$box" == "Linux" ]; then
       sudo apt-get -y install ${2:-$1}
+    else
+      echo "installing ${2:-$1}"
+      brew install ${2:-$1}
     fi
   fi
 }
@@ -80,12 +81,24 @@ bat0() { # optinally, install the very cool "bat" replacement for "cat"
 vim0() { # optionally, get the latest version of vim
   echo -e "${Yellow}Vim8 update. Takes about a minute.${White}"
   read -t 10 -p "Continue? [Cnt-C to abort]"
-  sudo add-apt-repository ppa:jonathonf/vim
-  sudo apt update
-  sudo apt-get upgrade vim
+  if [ "$box" == "Linux" ]; then
+      sudo apt-get -y install ${2:-$1}
+      sudo add-apt-repository ppa:jonathonf/vim
+      sudo apt update
+      sudo apt-get upgrade vim
+  fi
   if [ ! -d "$HOME/.vim/bundle" ]; then
      git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
      vim +PluginInstall +qall 
+  fi
+}
+brew0() {
+  if [ "$box" == "Mac" ]; then
+       if which brew > /dev/null; then 
+         true 
+       else 
+         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+       fi
   fi
 }
 puts() { # push all unsaved changes in all github repos
@@ -124,11 +137,12 @@ mkdir -p $HOME/tmp $HOME/bin
 
 # install stuff if it aint already there
 # call 'clean'  after the above installs
+brew0
 want
 
 # ensure certain $HOME/.dotfiles exists
 for f in $Files; do
-  g=$HOME/workspace/$f
+  g=$HOME/gits/timm/dot/$f
   h=$HOME/.$f
   if [ -f "$g" ]; then
     if [ ! -f "$h" ]; then 
