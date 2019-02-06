@@ -5,7 +5,7 @@ _Problem:_ Jumping between containers, want a quick set up in each new environme
 _Solution:_ 
 
 - Get everything sorted into `bashrc` then make it autoinstall
-- Built for Codeanywhere  but should work in most Ububtuu 16.0+ envionments
+- Built for Codeanywhere  and Mac but should work in most Ububtuu 16.0+ envionments
 
 
 ## Installation
@@ -25,7 +25,7 @@ After that, it should just all work, everytime you log in.
      - Long list of colorschemes installed
      - Nerdtree file browser installed
      - And other tricks as well
-- Tmux config files linked to `dot/tmux.conf`
+- Tmux config files linked to `dot/tmux.conf`   
      - Mouse support enabled
      - Prefix set to "control-space"
      - Vertical split set to "control-space |"
@@ -37,12 +37,13 @@ After that, it should just all work, everytime you log in.
 Installs:
 
 - Get the latest version of "vim" with `vim0`.
-- Get the cool "cat" replacement with `bat0`.
+      - Not yet working for Mac.
+- Get the cool "cat" replacement with `bat0` (UNIX) or `mac-bat0` (for Mac)
 
 System management:
 
 - Pretty display of current directory contents `ll`.
-- Free up disk space with `clean`.
+- Free up disk space with `clean` (for UNIX).
 
 Git tools:
 

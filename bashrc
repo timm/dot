@@ -72,6 +72,9 @@ clean() { # optinally, reclaim as much hard drive as you can
   sudo apt-get clean
   sudo apt autoremove
 }
+mac-bat0() { # optinally, install the very cool "bat" replacement for "cat"
+  brew install bat
+}
 bat0() { # optinally, install the very cool "bat" replacement for "cat"
   cd $HOME/tmp
   wget -nc https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
@@ -86,6 +89,10 @@ vim0() { # optionally, get the latest version of vim
       sudo add-apt-repository ppa:jonathonf/vim
       sudo apt update
       sudo apt-get upgrade vim
+  else
+      brew unlink macvim
+      brew install vim
+      brew upgrade vim
   fi
   if [ ! -d "$HOME/.vim/bundle" ]; then
      git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -121,6 +128,7 @@ PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";P
 ##########################
 # useful aliases
 alias vi=vim
+alias mc='mc -x'
 alias ll='ls -GF'
 alias get='git pull'
 alias grep='grep --color=auto'
