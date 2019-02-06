@@ -153,7 +153,12 @@ for f in $Files; do
 done
 
 # ensure $HOME/.bashrc loads this file
-LINE=". $DOT/bashrc"
-FILE=$HOME/.bashrc
-if [ ! -f "$FILE" ]; then touch $FILE; fi
-grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+  LINE=". $DOT/bashrc"
+  FILE=$HOME/.bashrc
+  if [ ! -f "$FILE" ]; then touch $FILE; fi
+  grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+
+  LINE=". $HOME/.bashrc"
+  FILE=$HOME/.profile
+  if [ ! -f "$FILE" ]; then touch $FILE; fi
+  grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"

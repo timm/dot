@@ -21,7 +21,7 @@ set splitbelow
 set title
 set visualbell
 "set number
-"syntax on 
+syntax on 
 "set fillchars+=vert:\
 "colorscheme torte
 "colorscheme default
