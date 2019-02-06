@@ -166,6 +166,7 @@ done
   if [ ! -f "$FILE" ]; then touch $FILE; fi
   grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
 
+# ensure $HOME/.profile $HOME/.bashrc
   LINE=". $HOME/.bashrc"
   FILE=$HOME/.profile
   if [ ! -f "$FILE" ]; then touch $FILE; fi
