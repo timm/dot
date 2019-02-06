@@ -21,6 +21,8 @@ want() {
 }
 like() {
 	got robots bsdgames
+        echo "if u want games, use "
+        echo "https://gist.github.com/jdmartin/24807e561fe8f90eca256f4e3b92c7fa"
 }
 # end config
 # ######################################################
@@ -128,6 +130,7 @@ PROMPT_COMMAND='echo -ne "${_c6}\033]0;$(here ../..)/$(here ..)/$(here .)\007";P
 ##########################
 # useful aliases
 alias vi=vim
+alias matrix="cmatrix -bs -u 6"
 alias mc='mc -x'
 alias ll='ls -GF'
 alias get='git pull'
