@@ -7,7 +7,11 @@ filetype indent plugin on
 set autoindent
 set background=light
 set backspace=indent,eol,start
-set backupdir^=$HOME/tmp
+
+set nobackup
+set noswapfile
+set directory=~/.tmp,~/.vim-tmp,~/tmp,/var/tmp,/tmp 
+
 set hlsearch
 set ignorecase
 set incsearch
@@ -51,7 +55,18 @@ if has("mouse_sgr")
     set ttymouse=sgr
 else
     set ttymouse=xterm2
-end
+end     
+
+" show trailing whitespace chars
+set list
+set listchars=tab:>-,trail:.,extends:#,nbsp:.
+
+"Last up in this section I just fix the terminal code support so both my backspace and delete keys work as expected on OS X.
+
+" Setup term color support
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
 
 set nocompatible
 filetype off
