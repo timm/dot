@@ -7,6 +7,7 @@ GITS="$HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*"
 
 want() {
 	got mc
+	got wget  
 	got tree  
 	got tmux  
 	got ncdu
