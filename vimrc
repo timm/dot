@@ -1,12 +1,18 @@
 autocmd BufEnter * silent! lcd %:p:h
-"filetype indent plugin on
+
+filetype off
+syntax on 
+filetype indent plugin on
+
 set autoindent
 set background=light
 set backspace=indent,eol,start
 set backupdir^=$HOME/tmp
+set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+set matchpairs+=<:>
 set matchtime=15
 set modelines=3
 set mouse=a
@@ -14,14 +20,27 @@ set nocompatible
 set nohlsearch
 set ruler
 set scrolloff=3
+set showcmd
 set showmatch
+set showmode
 set smartcase
 set splitbelow
 "set syntax=on
 set title
+set ttyfast
 set visualbell
 "set number
-syntax on 
+set wrap
+
+set matchpairs+=<:>
+
+
+set statusline=%F%m%r%h%w\ [%{&ff}:%Y]%=\ %l,%v 
+
+" Map the <Space> key to toggle a selected fold opened/closed.
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+
 "set fillchars+=vert:\
 "colorscheme torte
 "colorscheme default
