@@ -100,3 +100,4 @@ let g:ycm_server_log_level = 'debug'
 
 set background=dark    " Setting dark mode
 colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
