@@ -39,7 +39,7 @@ set wrap
 set matchpairs+=<:>
 
 
-set statusline=%F%m%r%h%w\ [%{&ff}:%Y]%=\ %l,%v 
+set statusline=%F%m%r%h%w\ [%{&ff}:%Y]%=\ %l,%v\ 
 
 " Map the <Space> key to toggle a selected fold opened/closed.
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
