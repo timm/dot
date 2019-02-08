@@ -39,7 +39,7 @@ set wrap
 set matchpairs+=<:>
 
 
-set statusline=%F%m%r%h%w\ [%{&ff}:%Y]%=\ %l,%v\ 
+set statusline=\ %F%m%r%h%w\ [%{&ff}:%Y]%=\ %l,%v\ 
 
 " Map the <Space> key to toggle a selected fold opened/closed.
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -91,6 +91,7 @@ filetype plugin indent on
 autocmd vimenter * NERDTree 
 autocmd VimEnter * wincmd w
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeWinPos = "right"
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
