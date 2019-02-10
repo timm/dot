@@ -16,12 +16,12 @@ want() {
 	got aspell
 	got ranger
 	got cmatrix
+	got reattach-to-user-namespace
 	got lua    lua5.2
 	got gst    gnu-smalltalk
 	got swipl  swi-prolog
 }
 like() {
-        sudo gem install tmuxinator
 	got robots bsdgames
         echo "if u want games, use "
         echo "https://gist.github.com/jdmartin/24807e561fe8f90eca256f4e3b92c7fa"

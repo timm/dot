@@ -38,6 +38,7 @@ set wrap
 
 set matchpairs+=<:>
 
+set clipboard=unnamed
 
 set statusline=\ %F%m%r%h%w\ [%{&ff}:%Y]%=\ %l,%v\ 
 
