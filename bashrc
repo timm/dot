@@ -6,20 +6,21 @@ Files="bashrc tmux.conf gitignore vimrc"
 GITS="$HOME/workspace $HOME/gits/[A-Za-z0-9_]*/[A-Za-z0-9_]*"
 
 want() {
-	got mc
-	got wget  
-	got tree  
-	got tmux  
-	got ncdu
-	got htop
-	got clisp 
-	got aspell
-	got ranger
-	got cmatrix
-	got reattach-to-user-namespace
-	got lua    lua5.2
-	got gst    gnu-smalltalk
-	got swipl  swi-prolog
+  got mc
+  got wget  
+  got tree  
+  got tmux  
+  got ncdu
+  got htop
+  got ctags
+  got clisp 
+  got aspell
+  got ranger
+  got cmatrix
+  got reattach-to-user-namespace
+  got lua    lua5.2
+  got gst    gnu-smalltalk
+  got swipl  swi-prolog
 }
 like() {
 	got robots bsdgames

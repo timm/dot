@@ -80,6 +80,7 @@ Plugin 'tbastos/vim-lua'
 Plugin 'scrooloose/vim-fugitive'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'soli/prolog-vim'
+Plugin 'majutsushi/tagbar'
 "Plugin 'valloric/youcompleteme'
 
 " Gruvbox
@@ -103,3 +104,5 @@ let g:ycm_server_log_level = 'debug'
 set background=dark    " Setting dark mode
 colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
+
+nmap <F8> :TagbarToggle<CR>
