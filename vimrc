@@ -106,3 +106,4 @@ colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 
 nmap <F8> :TagbarToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
