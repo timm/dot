@@ -113,18 +113,22 @@ brew0() {
        fi
   fi
 }
-alls() { # push all unsaved changes in all github repos
+puts() { # push all unsaved changes in all github repos
   for d in $GITS; do
     if [ -d "$d" ]; then
       printf "\n${Yellow}#---| $d |-----------${White}\n"
-      ( cd $d
-	git commit -am saving; git push
-      )
+      ( cd $d; git commit -am saving; git push )
     fi
   done
 }
-puts() { alls 'git commit -am saving; git push'; }
-gets() { alls 'git pull'; }
+gets() { # push all unsaved changes in all github repos
+  for d in $GITS; do
+    if [ -d "$d" ]; then
+      printf "\n${Yellow}#---| $d |-----------${White}\n"
+      ( cd $d; git pull )
+    fi
+  done
+}
 
 ###########################
 # make the prompty pretty
