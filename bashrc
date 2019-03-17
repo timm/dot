@@ -123,6 +123,16 @@ puts() { # push all unsaved changes in all github repos
     fi
   done
 }
+gets() { # push all unsaved changes in all github repos
+  for d in $GITS; do
+    if [ -d "$d" ]; then
+      printf "\n${Yellow}#---| $d |-----------${White}\n"
+      (cd $d
+       git pull
+      )
+    fi
+  done
+}
 
 ###########################
 # make the prompty pretty
