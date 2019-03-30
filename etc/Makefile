@@ -10,21 +10,34 @@ Here = my#
 Tmp  = $(HOME)/tmp#
 Tests= ../tests#
 
+
+Lang=Any# or Lua or Py
+
+default:
+	echo 1
+
 ############################################################
 all: dirs heres luas txts mds chmods
 
 dirs: 
-  @if [ ! -d "$(Tmp)"   ];then echo mkdir $(Tmp)  ;mkdir $(Tmp);  fi
-  @if [ ! -d "$(Tests)" ];then echo mkdir $(Tests);mkdir $(Tests);fi
+	@if [ ! -d "$(Tmp)"   ];then echo mkdir $(Tmp)  ;mkdir $(Tmp);  fi
+	@if [ ! -d "$(Tests)" ];then echo mkdir $(Tests);mkdir $(Tests);fi
 
 chmods:
-  @chmod +x $(Here)/*
+	@chmod +x $(Here)/*
 
 heres: $(Here)/blank.lua 
-luas:  use.lua $(Tests)/use.lua
-txts:  ../.gitignore ../requirements.txt 
-mds :  ../CITATION.md ../CONTRIBUTING.md ../CODE_OF_CONDUCT.md ../LICENSE.md
-  
+lua:  ~/.gitignore use.lua $(Tests)/use.lua
+txt:  ../.gitignore ../requirements.txt 
+md :  ../CITATION.md ../CONTRIBUTING.md ../CODE_OF_CONDUCT.md ../LICENSE.md
+
+~/.gitignore:
+	@$(MAKE) $(Lang)ignore > $@; git add $@
+
+LuaIgnore: ; @echo "$$MacSkip$$VimSkip$$LuaSkip" 
+AnyIgnore: ; @echo "$$MacSkip$$VimSkip"          
+PyIgnore:  ; @echo "$$MacSkip$$VimSkip$$PySkip"  
+	 
 use.lua               : ; echo "$$USE"      > $@; git add $@
 ../.gitignore         : ; echo "$$IGNORE"   > $@; git add $@
 ../LICENSE.md         : ; echo "$$LICENSE"  > $@; git add $@
@@ -36,29 +49,76 @@ $(Here)/blank.lua     : ; echo "$$BLANK"    > $@; git add $@
 ../CODE_OF_CONDUCT.md : ; echo "$$CONDUCT"  > $@; git add $@
 
 linux: all
-  @sudo apt-get update
-  @if [ ! `which pip`    ]>&2;then sudo apt-get install python3-pip;fi
-  @if [ ! `which lua`    ]>&2;then sudo apt-get install lua;    fi
-  @if [ ! `which luajit` ]>&2;then sudo apt-get install luajit; fi
-  @if [ ! `which pycco`  ]>&2;then sudo -H pip install pycco;   fi
+	@sudo apt-get update
+	@if [ ! `which pip`    ]>&2;then sudo apt-get install python3-pip;fi
+	@if [ ! `which lua`    ]>&2;then sudo apt-get install lua;    fi
+	@if [ ! `which luajit` ]>&2;then sudo apt-get install luajit; fi
+	@if [ ! `which pycco`  ]>&2;then sudo -H pip install pycco;   fi
 
 ## todo. needs mac install pip
 mac: all
-  @if [ ! `which lua`    ] >&2;then brew install lua;          fi
-  @if [ ! `which luajit` ] >&2;then brew install luajit;       fi
-  @if [ ! `which pycco`  ] >&2;then sudo -H pip install pycco; fi
+	@if [ ! `which lua`    ] >&2;then brew install lua;          fi
+	@if [ ! `which luajit` ] >&2;then brew install luajit;       fi
+	@if [ ! `which pycco`  ] >&2;then sudo -H pip install pycco; fi
 
 ## what about windows
 ############################################################
 define REQUIRES
-lua>=5.2
-luajit>=5.2
+lua>=5.1
+luajit>=5.1
 pycco>=0.6
+python>=3.7
 endef
 export REQUIRES
 
 ############################################################
-define IGNORE
+define LuaSkip
+### Lua ###
+# Compiled Lua sources
+luac.out
+
+# luarocks build files
+*.src.rock
+*.zip
+*.tar.gz
+
+# Object files
+*.o
+*.os
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+*.def
+*.exp
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+endef
+export LuaSkip
+
+############################################################
+define VimSkip
 ### Vim ###
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
@@ -67,10 +127,169 @@ Session.vim
 .netrwhist
 *~
 endef 
-export IGNORE
+export VimSkip
 
 ############################################################
-define BLANK
+define MacSkip
+### Mac  ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+endef 
+export MacSkip
+
+define PySkip
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don’t work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+endef
+export PySkip
+
+############################################################
+define LuaBlank
 -- vim: ft=lua ts=2 sw=2 sts=2 et : cindent : formatoptions+=cro
 -- $(What) copyright (c) $(When) $(Who), $(Email)
 -- All rights reserved, opensource.org/licenses/BSD-3-Clause
@@ -82,7 +301,7 @@ local Object=require('use')('src/lib.lua')
 --------- --------- --------- --------- --------- --------- ---------
 return isMain('lib') and rogues() 
 endef 
-export BLANK
+export LuaBlank
 
 ############################################################
 define USE
