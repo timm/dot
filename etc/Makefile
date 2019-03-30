@@ -8,13 +8,16 @@ When     = 2018,2019#
 Email    = timm@ieee.org#
 Title    = Init methods for a repo#
 Where    = github.com/timm/dot/#
+
+dConfig  = $(HOME)/.config#
 dTmp     = $(HOME)/tmp#
 dTests   = ../tests#
 dSrc     = ../src#
 dData    = $(dTests)/data#
 dDoc     = ../docs#
 dEtc     = $(dSrc)/my#
-dDirs    = $(dTmp) $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
+dGhub    = $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
+dDirs    = $(dGHub) $(dTmp) $(dConfig)#
 
 MAKER    = $(MAKE) --no-print-directory#
 
@@ -34,10 +37,13 @@ md :  ../CITATION.md ../CONTRIBUTING.md ../CODE_OF_CONDUCT.md ../LICENSE.md
 
 .PHONY: dirs
 dirs: 
-	@$(foreach d,$(dDirs),        \
-	      if [ ! -d "$d" ]; then   \
-                echo mkdir $d; mkdir $d; \
-                touch $d/README.md; git add $d/README.md; fi;)
+	@$(foreach d,$(dDirs), \
+              if [ ! -d "$d" ]; \
+              then echo mkdir $d; mkdir $d; fi; )
+	@$(foreach d,$(dGhub),                  \
+	      if [ ! -f "$d/README.md" ]; then   \
+	         touch $d/README.md;               \
+                 git add $d/README.md; fi; )
 
 ############################################################
 define aptget
@@ -53,9 +59,10 @@ endef
 
 packages:
 	@$(MAKER) $(Platform)Packages
-	
+
 UbuntuPackages:
-	sudo apt-get update
+	sudo apt-get -y update
+	sudo apt-get -y upgrade
 	$(call aptget,aspell,aspell)
 	$(call aptget,clisp,clisp)
 	$(call aptget,cmatrix,cmatrix)
@@ -64,25 +71,26 @@ UbuntuPackages:
 	$(call aptget,gst,gnu-smalltalk)
 	$(call aptget,htop,htop)
 	$(call aptget,luajit,luajit)
-	$(call aptget,lua,lua)
 	$(call aptget,lua,lua5.2)
 	$(call aptget,ncdu,ncdu)
 	$(call aptget,pip,python-pip)
-	$(call aptget,pycco,pycco)
+	@sudo -H pip install --upgrade pip
 	$(call aptget,python,python3)
 	$(call aptget,ranger,ranger)
 	$(call aptget,robots,bsdgames)
-	$(call aptget,reattach-to-user-namespace,reattach-to-user-namespace)
 	$(call aptget,swipl,swi-prolog)
 	$(call aptget,tmux,tmux)
 	$(call aptget,tree,tree)
 	$(call aptget,wget,wget)
+	sudo -H pip install pycco
+	@if [ ! `which bat` ] >&2; then \
+           cd $(dTmp); \
+	   wget https://github.com/sharkdp/bat/releases/download/v0.6.1/bat_0.6.1_amd64.deb; \
+	   sudo dpkg -i bat_0.6.1_amd64.deb; \
+	fi
 	sudo apt autoclean
 	sudo apt-get clean
 	sudo apt autoremove
-	cd $(dTmp); \
-	wget https://github.com/sharkdp/bat/releases/download/v0.6.1/bat_0.6.1_amd64.deb; \
-	sudo dpkg -i bat_0.6.1_amd64.deb
 
 UnbuntuBat: dirs
 	cd $(dTmp)
