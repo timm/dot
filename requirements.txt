@@ -1,0 +1,4 @@
+lua>=5.1
+luajit>=5.1
+pycco>=0.6
+python>=3.7

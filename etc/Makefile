@@ -1,67 +1,137 @@
 #!/usr/bin/env make -f
 
-What = Github101#
-Who  = Tim Menzies#
-When = 2018,2019#
-Email= timm@ieee.org#
-Title= Init methods for a repo#
-Where= github.com/timm/dot/#
-Here = my#
-Tmp  = $(HOME)/tmp#
-Tests= ../tests#
+Lang     = Any# or Lua or Py
+Platform = Ubuntu# or Mac
+What     = Github101#
+Who      = Tim Menzies#
+When     = 2018,2019#
+Email    = timm@ieee.org#
+Title    = Init methods for a repo#
+Where    = github.com/timm/dot/#
+dTmp     = $(HOME)/tmp#
+dTests   = ../tests#
+dSrc     = ../src#
+dData    = $(dTests)/data#
+dDoc     = ../docs#
+dEtc     = $(dSrc)/my#
+dDirs    = $(dTmp) $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
 
-
-Lang=Any# or Lua or Py
+MAKER    = $(MAKE) --no-print-directory#
 
 default:
 	echo 1
 
 ############################################################
-all: dirs heres luas txts mds chmods
+all: dirs github
 
-dirs: 
-	@if [ ! -d "$(Tmp)"   ];then echo mkdir $(Tmp)  ;mkdir $(Tmp);  fi
-	@if [ ! -d "$(Tests)" ];then echo mkdir $(Tests);mkdir $(Tests);fi
-
-chmods:
-	@chmod +x $(Here)/*
+#heres luas txts mds chmods
+chmods: ; @chmod +x $(Here)/*
 
 heres: $(Here)/blank.lua 
 lua:  ~/.gitignore use.lua $(Tests)/use.lua
 txt:  ../.gitignore ../requirements.txt 
 md :  ../CITATION.md ../CONTRIBUTING.md ../CODE_OF_CONDUCT.md ../LICENSE.md
 
+.PHONY: dirs
+dirs: 
+	@$(foreach d,$(dDirs),        \
+	      if [ ! -d "$d" ]; then   \
+                echo mkdir $d; mkdir $d; \
+                touch $d/README.md; git add $d/README.md; fi;)
+
+############################################################
+define aptget
+   if [ ! `which $(1)` ]>&2; then sudo apt-get -y install $(2);fi
+endef
+
+define brew
+  if [ ! `which brew` ] >&2; then\
+    /usr/bin/ruby -e \
+       $(shell curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install) ; fi
+  if [ ! `which $(1)` ] >&2; then brew install $(2); fi
+endef
+
+packages:
+	@$(MAKER) $(Platform)Packages
+	
+UbuntuPackages:
+	sudo apt-get update
+	$(call aptget,aspell,aspell)
+	$(call aptget,clisp,clisp)
+	$(call aptget,cmatrix,cmatrix)
+	$(call aptget,ctags,ctags)
+	$(call aptget,gnuplot,gnuplot)
+	$(call aptget,gst,gnu-smalltalk)
+	$(call aptget,htop,htop)
+	$(call aptget,luajit,luajit)
+	$(call aptget,lua,lua)
+	$(call aptget,lua,lua5.2)
+	$(call aptget,ncdu,ncdu)
+	$(call aptget,pip,python-pip)
+	$(call aptget,pycco,pycco)
+	$(call aptget,python,python3)
+	$(call aptget,ranger,ranger)
+	$(call aptget,robots,bsdgames)
+	$(call aptget,reattach-to-user-namespace,reattach-to-user-namespace)
+	$(call aptget,swipl,swi-prolog)
+	$(call aptget,tmux,tmux)
+	$(call aptget,tree,tree)
+	$(call aptget,wget,wget)
+	sudo apt autoclean
+	sudo apt-get clean
+	sudo apt autoremove
+	cd $(dTmp); \
+	wget https://github.com/sharkdp/bat/releases/download/v0.6.1/bat_0.6.1_amd64.deb; \
+	sudo dpkg -i bat_0.6.1_amd64.deb
+
+UnbuntuBat: dirs
+	cd $(dTmp)
+	wget -nc https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
+	sudo dpkg -i bat_0.9.0_amd64.deb
+	rm  bat_0.9.0_amd64.deb
+
+MacPackages: 
+	@sudo easy_install pip
+	@if [ ! `which pycco`  ] >&2; then sudo -H pip install pycco; fi
+	@(call brew,aspell,aspell)
+	@(call brew,clisp,clisp)
+	@(call brew,cmatrix,cmatrix)
+	@(call brew,ctags,ctags)
+	@(call abrew,gnuplot,gnuplot)
+	@(call brew,gst,gnu-smalltalk)
+	@(call brew,htop,htop)
+	@(call brew,luajit,luajit)
+	@(call brew,lua,lua)
+	@(call brew,lua,lua5.2)
+	@(call brew,ncdu,ncdu)
+	@(call brew,pycco,pycco)
+	@(call brew,python,python3)
+	@(call brew,ranger,ranger)
+	@(call brew,reattach-to-user-namespace,reattach-to-user-namespace)
+	@(call brew,swipl,swi-prolog)
+	@(call brew,tmux,tmux)
+	@(call brew,tree,tree)
+	@(call brew,wget,wget)
+
 ~/.gitignore:
-	@$(MAKE) $(Lang)ignore > $@; git add $@
+	@$(MAKER) $(Lang)ignore > $@; git add $@
 
 LuaIgnore: ; @echo "$$MacSkip$$VimSkip$$LuaSkip" 
 AnyIgnore: ; @echo "$$MacSkip$$VimSkip"          
 PyIgnore:  ; @echo "$$MacSkip$$VimSkip$$PySkip"  
+
+github: dirs ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt ../CODE_OF_CONDUCT.md
 	 
-use.lua               : ; echo "$$USE"      > $@; git add $@
-../.gitignore         : ; echo "$$IGNORE"   > $@; git add $@
 ../LICENSE.md         : ; echo "$$LICENSE"  > $@; git add $@
 ../CITATION.md        : ; echo "$$CITATION" > $@; git add $@
-$(Tests)/use.lua      : ; echo "$$USE"      > $@; git add $@
-$(Here)/blank.lua     : ; echo "$$BLANK"    > $@; git add $@
 ../CONTRIBUTING.md    : ; echo "$$CONTRIB"  > $@; git add $@
 ../requirements.txt   : ; echo "$$REQUIRES" > $@; git add $@
 ../CODE_OF_CONDUCT.md : ; echo "$$CONDUCT"  > $@; git add $@
 
-linux: all
-	@sudo apt-get update
-	@if [ ! `which pip`    ]>&2;then sudo apt-get install python3-pip;fi
-	@if [ ! `which lua`    ]>&2;then sudo apt-get install lua;    fi
-	@if [ ! `which luajit` ]>&2;then sudo apt-get install luajit; fi
-	@if [ ! `which pycco`  ]>&2;then sudo -H pip install pycco;   fi
+#use.lua               : ; echo "$$USE"      > $@; git add $@
+#$(Tests)/use.lua      : ; echo "$$USE"      > $@; git add $@
+#$(Here)/blank.lua     : ; echo "$$BLANK"    > $@; git add $@
 
-## todo. needs mac install pip
-mac: all
-	@if [ ! `which lua`    ] >&2;then brew install lua;          fi
-	@if [ ! `which luajit` ] >&2;then brew install luajit;       fi
-	@if [ ! `which pycco`  ] >&2;then sudo -H pip install pycco; fi
-
-## what about windows
 ############################################################
 define REQUIRES
 lua>=5.1
@@ -161,6 +231,7 @@ Temporary Items
 endef 
 export MacSkip
 
+############################################################
 define PySkip
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -287,43 +358,6 @@ dmypy.json
 .pyre/
 endef
 export PySkip
-
-############################################################
-define LuaBlank
--- vim: ft=lua ts=2 sw=2 sts=2 et : cindent : formatoptions+=cro
--- $(What) copyright (c) $(When) $(Who), $(Email)
--- All rights reserved, opensource.org/licenses/BSD-3-Clause
--- For examples of usage, see $(Tests)/xxx.lua.
---------- --------- --------- --------- --------- --------- ---------
-
-local Object=require('use')('src/lib.lua')
-
---------- --------- --------- --------- --------- --------- ---------
-return isMain('lib') and rogues() 
-endef 
-export LuaBlank
-
-############################################################
-define USE
--- vim: ft=lua ts=2 sw=2 sts=2 et : cindent : formatoptions+=cro
--- $(What) copyright (c) $(When) $(Who), $(Email)
--- All rights reserved, opensource.org/licenses/BSD-3-Clause
---------- --------- --------- --------- --------- --------- ---------
-
-local root = '../'
-local seen = {}
-
-function use(f, show)
-  if not seen[f] then 
-    if show then io.stderr:write('-- ' .. f .. '\n') end
-    seen[f] = dofile(root .. f)
-  end 
-  return seen[f]
-end 
-
-return use
-endef 
-export USE
 
 ############################################################
 define CITATION
@@ -477,6 +511,44 @@ POSSIBILITY OF SUCH DAMAGE.
 
 endef
 export LICENSE
+
+############################################################
+define LuaBlank
+-- vim: ft=lua ts=2 sw=2 sts=2 et : cindent : formatoptions+=cro
+-- $(What) copyright (c) $(When) $(Who), $(Email)
+-- All rights reserved, opensource.org/licenses/BSD-3-Clause
+-- For examples of usage, see $(Tests)/xxx.lua.
+--------- --------- --------- --------- --------- --------- ---------
+
+local Object=require('use')('src/lib.lua')
+
+--------- --------- --------- --------- --------- --------- ---------
+return isMain('lib') and rogues() 
+endef 
+export LuaBlank
+
+############################################################
+define USE
+-- vim: ft=lua ts=2 sw=2 sts=2 et : cindent : formatoptions+=cro
+-- $(What) copyright (c) $(When) $(Who), $(Email)
+-- All rights reserved, opensource.org/licenses/BSD-3-Clause
+--------- --------- --------- --------- --------- --------- ---------
+
+local root = '../'
+local seen = {}
+
+function use(f, show)
+  if not seen[f] then 
+    if show then io.stderr:write('-- ' .. f .. '\n') end
+    seen[f] = dofile(root .. f)
+  end 
+  return seen[f]
+end 
+
+return use
+endef 
+export USE
+
 
 
 
