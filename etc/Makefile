@@ -1,4 +1,5 @@
-#!/usr/bin/env make -f
+#!/usr/bin/make -f
+SHELL = /bin/bash
 
 Lang     = Any# or Lua or Py
 Platform = Ubuntu# or Mac
@@ -10,6 +11,7 @@ Title    = Init methods for a repo#
 Where    = github.com/timm/dot/#
 
 dConfig  = $(HOME)/.config#
+dTmux    = $(HOME)/.config/tmux#
 dTmp     = $(HOME)/tmp#
 dTests   = ../tests#
 dSrc     = ../src#
@@ -17,7 +19,7 @@ dData    = $(dTests)/data#
 dDoc     = ../docs#
 dEtc     = $(dSrc)/my#
 dGhub    = $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
-dDirs    = $(dGHub) $(dTmp) $(dConfig)#
+dDirs    = $(dGHub) $(dTmp) $(dConfig) $(dTmux)#
 
 MAKER    = $(MAKE) --no-print-directory#
 
@@ -45,22 +47,14 @@ dirs:
 	         touch $d/README.md;               \
                  git add $d/README.md; fi; )
 
+
 ############################################################
-define aptget
-   if [ ! `which $(1)` ]>&2; then sudo apt-get -y install $(2);fi
-endef
-
-define brew
-  if [ ! `which brew` ] >&2; then\
-    /usr/bin/ruby -e \
-       $(shell curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install) ; fi
-  if [ ! `which $(1)` ] >&2; then brew install $(2); fi
-endef
-
 packages:
-	@$(MAKER) $(Platform)Packages
+	$(MAKER) $(Platform)Packages
 
-UbuntuPackages:
+aptget = if [ ! `which $(1)` ]>&2; then sudo apt-get -y install $(2); fi#
+
+UbuntuPackages :
 	sudo apt-get -y update
 	sudo apt-get -y upgrade
 	$(call aptget,aspell,aspell)
@@ -72,6 +66,7 @@ UbuntuPackages:
 	$(call aptget,htop,htop)
 	$(call aptget,luajit,luajit)
 	$(call aptget,lua,lua5.2)
+	$(call aptget,mc,mc)
 	$(call aptget,ncdu,ncdu)
 	$(call aptget,pip,python-pip)
 	@sudo -H pip install --upgrade pip
@@ -98,6 +93,14 @@ UnbuntuBat: dirs
 	sudo dpkg -i bat_0.9.0_amd64.deb
 	rm  bat_0.9.0_amd64.deb
 
+define brew
+  if [ ! `which brew` ] >&2; then\
+    /usr/bin/ruby -e \
+       $(shell curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install) ; fi
+  if [ ! `which $(1)` ] >&2; then brew install $(2); fi
+endef
+
+
 MacPackages: 
 	@sudo easy_install pip
 	@if [ ! `which pycco`  ] >&2; then sudo -H pip install pycco; fi
@@ -111,6 +114,7 @@ MacPackages:
 	@(call brew,luajit,luajit)
 	@(call brew,lua,lua)
 	@(call brew,lua,lua5.2)
+	@(call brew,mc,mc)
 	@(call brew,ncdu,ncdu)
 	@(call brew,pycco,pycco)
 	@(call brew,python,python3)
@@ -121,6 +125,14 @@ MacPackages:
 	@(call brew,tree,tree)
 	@(call brew,wget,wget)
 
+tmuxs:  $(HOME)/.tmux.conf $(dTmux)/tmux-session1
+
+$(HOME)/.tmux.conf:
+	echo "$$TmuxConf" > $@
+
+$(dTmux)/tmux-session1 :
+	echo "$$TmuxSession" > $@
+	
 ~/.gitignore:
 	@$(MAKER) $(Lang)ignore > $@; git add $@
 
@@ -557,6 +569,149 @@ return use
 endef 
 export USE
 
+############################################################
+define TmuxSession
+split-window -h -p 33 "htop"
+split-window -v -p 83 
+split-window "mc -x"
+rename-window "main"
+new-window 
+rename-window "news"
+send-keys "cd ~/gits/timm/timm.github.io" C-m
+split-window -h  -p 50
+send-keys "cd ~/gits/timm/timm.github.io/etc; vim news.lua" C-m
+rename-window "other"
+endef
+export TmuxSession
 
+
+############################################################
+define TmuxConf
+set -g aggressive-resize on
+
+# change the prefix from 'C-b' to 'C-a'
+# (remap capslock to CTRL for easy access)
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+
+
+# start with window 1 (instead of 0)
+set -g base-index 1
+
+# start with pane 1
+set -g pane-base-index 1
+
+# split panes using | and -, make sure they open in the same path
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+unbind '"'
+unbind %
+
+# open new windows in the current path
+bind c new-window -c "#{pane_current_path}"
+
+# reload config file
+bind r source-file ~/.tmux.conf
+
+unbind p
+bind p previous-window
+
+# shorten command delay
+set -sg escape-time 1
+
+# don't rename windows automatically
+set-option -g allow-rename off
+
+# mouse control (clickable windows, panes, resizable panes)
+set -g mouse on
+
+# Use Alt-arrow keys without prefix key to switch panes
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# enable vi mode keys
+set-window-option -g mode-keys vi
+
+# set default terminal mode to 256 colors
+set -g default-terminal "screen-256color"
+
+# fix pbcopy/pbpaste
+if 'command -v reattach-to-user-namespace >/dev/null' \
+    'set -gq @osx-pasteboard true'
+
+if 'tmux show -gv @osx-clipboard' \
+    'set -g default-command "reattach-to-user-namespace -l $SHELL"'
+
+# present a menu of URLs to open from the visible pane. sweet.
+bind-key u capture-pane \;\
+    save-buffer /tmp/tmux-buffer \;\
+    split-window -l 10 "urlview /tmp/tmux-buffer"
+
+
+######################
+### DESIGN CHANGES ###
+######################
+
+# loud or quiet?
+set-option -g visual-activity off
+set-option -g visual-bell off
+set-option -g visual-silence off
+set-window-option -g monitor-activity off
+set-option -g bell-action none
+
+#  modes
+setw -g clock-mode-colour colour5
+setw -g mode-attr bold
+setw -g mode-fg colour1
+setw -g mode-bg colour18
+
+# panes
+set -g pane-border-bg colour0
+set -g pane-border-fg colour19
+set -g pane-active-border-bg colour0
+set -g pane-active-border-fg colour9
+
+# statusbar
+set -g status-position top
+set -g status-justify left
+set -g status-bg colour18
+set -g status-fg colour137
+set -g status-attr dim
+set -g status-left ''
+set -g status-right '#[fg=colour233,bg=colour19,bold] %d/%m #[fg=colour233,bg=colour8,bold] %H:%M:%S '
+set -g status-right-length 50
+set -g status-left-length 20
+
+setw -g window-status-current-fg colour1
+setw -g window-status-current-bg colour19
+setw -g window-status-current-attr bold
+setw -g window-status-current-format ' #I#[fg=colour249]:#[fg=colour255]#W#[fg=colour249]#F '
+
+setw -g window-status-fg colour9
+setw -g window-status-bg colour18
+setw -g window-status-attr none
+setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244]#F '
+
+setw -g window-status-bell-attr bold
+setw -g window-status-bell-fg colour255
+setw -g window-status-bell-bg colour1
+
+# messages
+set -g message-attr bold
+set -g message-fg colour232
+set -g message-bg colour16
+
+############################################
+# layouts
+bind S source-file ~/.config/tmux/tmux-session1 
+endef
+export TmuxConf
+
+xx:
+	echo "$$TmuxConf"
 
 
