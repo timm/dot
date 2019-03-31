@@ -652,6 +652,11 @@ bind-key u capture-pane \;\
     split-window -l 10 "urlview /tmp/tmux-buffer"
 
 
+bind P paste-buffer
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection
+bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
+
 ######################
 ### DESIGN CHANGES ###
 ######################
