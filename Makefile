@@ -1,8 +1,6 @@
 #!/usr/bin/make -f
 SHELL = /bin/bash
 
-Lang     = Any# or Lua or Py
-Platform = Ubuntu# or Mac
 What     = Github101#
 Who      = Tim Menzies#
 When     = 2018,2019#
@@ -13,17 +11,16 @@ Where    = github.com/timm/dot/#
 dConfig  = $(HOME)/.config#
 dTmux    = $(HOME)/.config/tmux#
 dTmp     = $(HOME)/tmp#
-dTests   = ../tests#
-dSrc     = ../src#
-dData    = $(dTests)/data#
-dDoc     = ../docs#
+dTests   = tests#
+dSrc     = src#
+dData    = data#
+dDoc     = docs#
 dEtc     = $(dSrc)/my#
 dGhub    = $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
 dDirs    = $(dGHub) $(dTmp) $(dConfig) $(dTmux)#
 
-MAKER    = $(MAKE) --no-print-directory#
 
-default:
+help:
 	echo 1
 
 ############################################################
@@ -49,12 +46,10 @@ dirs:
 
 
 ############################################################
-packages:
-	$(MAKER) $(Platform)Packages
 
 aptget = if [ ! `which $(1)` ]>&2; then sudo apt-get -y install $(2); fi#
 
-UbuntuPackages :
+ubuntu:
 	sudo apt-get -y update
 	sudo apt-get -y upgrade
 	$(call aptget,aspell,aspell)
@@ -87,7 +82,7 @@ UbuntuPackages :
 	sudo apt-get clean
 	sudo apt autoremove
 
-UnbuntuBat: dirs
+ubuntuBat: dirs
 	cd $(dTmp)
 	wget -nc https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
 	sudo dpkg -i bat_0.9.0_amd64.deb
@@ -101,7 +96,7 @@ define brew
 endef
 
 
-MacPackages: 
+mac:
 	@sudo easy_install pip
 	@if [ ! `which pycco`  ] >&2; then sudo -H pip install pycco; fi
 	@(call brew,aspell,aspell)
@@ -133,12 +128,9 @@ $(HOME)/.tmux.conf:
 $(dTmux)/tmux-session1 :
 	echo "$$TmuxSession" > $@
 	
-~/.gitignore:
-	@$(MAKER) $(Lang)ignore > $@; git add $@
-
-LuaIgnore: ; @echo "$$MacSkip$$VimSkip$$LuaSkip" 
-AnyIgnore: ; @echo "$$MacSkip$$VimSkip"          
-PyIgnore:  ; @echo "$$MacSkip$$VimSkip$$PySkip"  
+ignore:    ; @echo "$$MacSkip$$VimSkip"          > .gitignore; git add .gitignore        
+LuaIgnore: ; @echo "$$MacSkip$$VimSkip$$LuaSkip" > .gitignore; git add .gitignore
+PyIgnore:  ; @echo "$$MacSkip$$VimSkip$$PySkip"  > .gitignore; git add .gitignore
 
 github: dirs ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt ../CODE_OF_CONDUCT.md
 	 
