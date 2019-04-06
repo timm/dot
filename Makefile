@@ -295,7 +295,7 @@ PROMPT_COMMAND='echo -ne "$$(hostname -s):$${_c6}$$(git branch 2>/dev/null | gre
 alias vi=vim
 alias matrix="cmatrix -bs -u 6"
 alias mc='mc -x'
-alias ls='ls -GF'
+alias ls='ls --color'
 alias get='git pull'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
