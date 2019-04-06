@@ -9,16 +9,15 @@ Title    = Init methods for a repo#
 Where    = github.com/timm/dot/#
 
 dConfig  = $(HOME)/.config#
-dTmux    = $(HOME)/.config/tmux#
+dDot     = $(dConfig)/dot#
 dTmp     = $(HOME)/tmp#
 dTests   = tests#
 dSrc     = src#
 dData    = data#
 dDoc     = docs#
-dEtc     = $(dSrc)/my#
+dEtc     = $(dSrc)/,#
 dGhub    = $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
-dDirs    = $(dGHub) $(dTmp) $(dConfig) $(dTmux)#
-
+dDirs    = $(dGhub) $(dTmp) $(dConfig) $(dDot)#
 
 help:
 	echo 1
@@ -44,7 +43,33 @@ dirs:
 	         touch $d/README.md;               \
                  git add $d/README.md; fi; )
 
+############################################################
+bashrc: dirs $(dDot)/bashrc
 
+$(HOME)/.bashrc:
+	touch $@
+
+$(dDot)/bashrc: $(HOME)/.bashrc 
+	@echo "$$BASHRC" > $@
+	@grep ". $@" $< || echo ". $@" >> $<
+
+vimMac    : vimMaxInstall    $(HOME)/.vim/bundle
+vimUbuntu : vimUbuntuInstall $(HOME)/.vim/bundle
+
+vimMacInstall:
+	brew unlink macvim
+	brew install vim
+	brew upgrade vim
+
+vimUbubtuInstall:
+	sudo add-apt-repository ppa:jonathonf/vim
+	sudo apt update
+	sudo apt-get upgrade vim
+
+$(HOME)/.vim/bundle: 
+	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	vim +PluginInstall +qall 
+	
 ############################################################
 
 aptget = if [ ! `which $(1)` ]>&2; then sudo apt-get -y install $(2); fi#
@@ -120,12 +145,12 @@ mac:
 	@(call brew,tree,tree)
 	@(call brew,wget,wget)
 
-tmuxs:  $(HOME)/.tmux.conf $(dTmux)/tmux-session1
+tmuxs:  dirs $(HOME)/.tmux.conf $(dDot)/tmux-session1
 
 $(HOME)/.tmux.conf:
 	echo "$$TmuxConf" > $@
 
-$(dTmux)/tmux-session1 :
+$(dDot)/tmux-session1 :
 	echo "$$TmuxSession" > $@
 	
 ignore:    ; @echo "$$MacSkip$$VimSkip"          > .gitignore; git add .gitignore        
@@ -143,6 +168,34 @@ github: dirs ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt
 #use.lua               : ; echo "$$USE"      > $@; git add $@
 #$(Tests)/use.lua      : ; echo "$$USE"      > $@; git add $@
 #$(Here)/blank.lua     : ; echo "$$BLANK"    > $@; git add $@
+
+############################################################
+define BASHRC
+
+_c0="\033[00m"     # white
+_c1="\033[01;32m"  # green
+_c2="\033[01;34m"  # blue
+_c3="\033[31m"     # red
+_c5="\033[35m"     # purple
+_c6="\033[33m"     # yellow
+_c7="\033[36m"     # turquoise
+
+here() { cd $$1; basename "$$PWD"; }
+
+PROMPT_COMMAND='echo -ne "$${_c6}\033]0;$(here ../..)/$$(here ..)/$$(here .)\007";PS1="$${_c1}$$(here ../..)/$$_c2$$(here ..)/$$_c3$$(here .) $${_c6}\!>$${_c0}\e[m "'
+
+alias vi=vim
+alias matrix="cmatrix -bs -u 6"
+alias mc='mc -x'
+alias ll='ls -GF'
+alias get='git pull'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias put='git commit -am saving; git push; git status'
+alias gc="git config credential.helper 'cache --timeout=3600'"
+endef
+export BASHRC
 
 ############################################################
 define REQUIRES
