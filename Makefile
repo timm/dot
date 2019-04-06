@@ -211,14 +211,14 @@ container, I can download this Makefile, do the following, then in just
 a few minutes I can be up and running in my kinda envrionment:
 
 - Some cool tricks for:
-	- mux, vim8, bash and git
+	- mux, vim8, bash, git, etc
 - Some standard packages installed: 
 	- apsell, bat, ctags, htop, mc, ncdu, pycco, ranger, tmux, 
 	  tree, vim8, wget, etc.
 - My favorite languages installed: 
 	- clisp, gnuplot, gnu-smalltalk, lua, luajit, python-pip, 
-          python3, swi-prolog,
-- And some silly things: cmatrix, bsdgames (unix only),
+          python3, swi-prolog, etc
+- And some silly things: cmatrix, bsdgames (unix only), etc
 
 I also add "," to the PATH so any directory can have a local
 set of executables in `,/`.
