@@ -47,10 +47,10 @@ dirs:
 bashrc: dirs $(dDot)/bashrc
 
 $(HOME)/.bashrc:
-	touch $@
+	@touch $@
 
 $(dDot)/bashrc: $(HOME)/.bashrc 
-	@echo "$$BASHRC" > $@
+	echo "$$BASHRC" > $@
 	@grep ". $@" $< || echo ". $@" >> $<
 
 vimMac    : vimMaxInstall    $(HOME)/.vim/bundle
