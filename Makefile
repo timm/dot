@@ -187,7 +187,7 @@ PROMPT_COMMAND='echo -ne "$${_c6}\033]0;$(here ../..)/$$(here ..)/$$(here .)\007
 alias vi=vim
 alias matrix="cmatrix -bs -u 6"
 alias mc='mc -x'
-alias ll='ls -GF'
+alias ls='ls -GF'
 alias get='git pull'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
