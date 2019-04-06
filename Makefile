@@ -1,11 +1,11 @@
 #!/usr/bin/make -f
 SHELL = /bin/bash
 
+# Optionally, if my.mk exists then include its local config.
 -include my.mk
 
-############################################################
-# Optionally, if my.mk exists and includes any of the 
-# following lines, then those values will override the following.
+# This my.mk file might set the following variables.
+# If not, they will be set as follows.
 
 What     ?= Github101#
 Who      ?= Tim Menzies#
@@ -35,7 +35,7 @@ help:
 
 ############################################################
 
-all: dirs bashrc tmuxs  $(HOME)/.vim/bundle vimrc
+all: dirs bashrc tmux  $(HOME)/.vim/bundle vimrc
 	@echo "To complete, please '. ~/.bashrc'"
 
 ############################################################
@@ -173,13 +173,18 @@ macInstall: macVimInstall
 	@(call brew,wget,wget)
 
 ############################################################
-tmuxs:  dirs $(HOME)/.tmux.conf $(dDot)/tmux-session1
+tmux:  dirs $(dDot)/tmux $(dDot)/tmux-session1
 
-$(HOME)/.tmux.conf:
+$(HOME)/.tmux.conf: 
+	@touch $@
+
+$(dDot)/tmux: $(HOME)/.tmux.conf 
 	@echo "$$TmuxConf" > $@
+	@(grep "source-file $@" $< || echo "source-file $@" >> $< )>/dev/null
 
 $(dDot)/tmux-session1 :
 	@echo "$$TmuxSession" > $@
+
 	
 ############################################################
 github: dirs dirsGh ignore ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt ../CODE_OF_CONDUCT.md
@@ -854,7 +859,6 @@ rename-window "other"
 endef
 export TmuxSession
 
-
 ############################################################
 define TmuxConf
 set -g aggressive-resize on
@@ -983,11 +987,8 @@ set -g message-bg colour16
 
 ############################################
 # layouts
-bind S source-file ~/.config/tmux/tmux-session1 
+bind S source-file $(dDot)/tmux-session1 
 endef
 export TmuxConf
-
-xx:
-	echo "$$TmuxConf"
 
 
