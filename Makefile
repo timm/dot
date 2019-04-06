@@ -852,9 +852,9 @@ split-window "mc -x"
 rename-window "main"
 new-window 
 rename-window "news"
-send-keys "cd ~/gits/timm/timm.github.io" C-m
+#send-keys "cd ~/gits/timm/timm.github.io" C-m
 split-window -h  -p 50
-send-keys "cd ~/gits/timm/timm.github.io/etc; vim news.lua" C-m
+#send-keys "cd ~/gits/timm/timm.github.io/etc; vim news.lua" C-m
 rename-window "other"
 endef
 export TmuxSession
