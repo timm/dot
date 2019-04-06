@@ -208,14 +208,17 @@ Mac and Unix installations as well all my Github repos.
 
 The goal here is that if ever I land on a new machine or an empty Ubuntu
 container, I can download this Makefile, do the following, then in just
-a few minutes I can  up and running in my kinda envrionment:
+a few minutes I can be up and running in my kinda envrionment:
 
-- tmux, vim8, some nice bashrc and git tricks, etc;
-- some standard packages installed: apsell, bat, ctags, htop,
-  mc, ncdu, pycco, ranger, tmux, tree, vim8, wget, etc.
-- my favorite languages installed: clisp, gnuplot, gnu-smalltalk, 
-  lua, luajit, python-pip, python3, swi-prolog,
-- and some silly things: cmatrix, bsdgames (unix only),
+- Some cool tricks for:
+	- mux, vim8, bash and git
+- Some standard packages installed: 
+	- apsell, bat, ctags, htop, mc, ncdu, pycco, ranger, tmux, 
+	  tree, vim8, wget, etc.
+- My favorite languages installed: 
+	- clisp, gnuplot, gnu-smalltalk, lua, luajit, python-pip, 
+          python3, swi-prolog,
+- And some silly things: cmatrix, bsdgames (unix only),
 
 I also add "," to the PATH so any directory can have a local
 set of executables in `,/`.
