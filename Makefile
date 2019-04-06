@@ -192,7 +192,7 @@ alias get='git pull'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias put='git commit -am saving; git push; git status'
+alias put='gc; git commit -am saving; git push; git status'
 alias gc="git config credential.helper 'cache --timeout=3600'"
 endef
 export BASHRC
