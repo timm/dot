@@ -1,80 +1,108 @@
 #!/usr/bin/make -f
 SHELL = /bin/bash
 
-What     = Github101#
-Who      = Tim Menzies#
-When     = 2018,2019#
-Email    = timm@ieee.org#
-Title    = Init methods for a repo#
-Where    = github.com/timm/dot/#
-
-dConfig  = $(HOME)/.config#
-dDot     = $(dConfig)/dot#
-dTmp     = $(HOME)/tmp#
-dTests   = tests#
-dSrc     = src#
-dData    = data#
-dDoc     = docs#
-dEtc     = $(dSrc)/,#
-dGhub    = $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
-dDirs    = $(dGhub) $(dTmp) $(dConfig) $(dDot)#
-
-help:
-	echo 1
+-include my.mk
 
 ############################################################
-all: dirs github
+# Optionally, if my.mk exists and includes any of the 
+# following lines, then those values will override the following.
 
-#heres luas txts mds chmods
+What     ?= Github101#
+Who      ?= Tim Menzies#
+When     ?= 2018,2019#
+Email    ?= timm@ieee.org#
+Title    ?= Init methods for a repo#
+Where    ?= github.com/timm/dot/#
+
+dConfig  ?= $(HOME)/.config#
+dDot     ?= $(dConfig)/dot#
+dTmp     ?= $(HOME)/tmp#
+
+dTests   ?= tests#
+dSrc     ?= src#
+dData    ?= data#
+dDoc     ?= docs#
+dEtc     ?= $(dSrc)/,#
+
+############################################################
+# Don't touch these two lines
+dDirs    = $(dTmp) $(dConfig) $(dDot)#
+dGhub    = $(dSrc) $(dTests) $(dData) $(dDoc) $(dEtc)#
+
+############################################################
+help:
+	@echo "$$HELP"
+
+############################################################
+
+all: dirs bashrc tmuxs  $(HOME)/.vim/bundle vimrc
+	@echo "To complete, please '. ~/.bashrc'"
+
+############################################################
 chmods: ; @chmod +x $(Here)/*
 
 heres: $(Here)/blank.lua 
 lua:  ~/.gitignore use.lua $(Tests)/use.lua
-txt:  ../.gitignore ../requirements.txt 
-md :  ../CITATION.md ../CONTRIBUTING.md ../CODE_OF_CONDUCT.md ../LICENSE.md
 
+############################################################
 .PHONY: dirs
-dirs: 
+
+dirs:
 	@$(foreach d,$(dDirs), \
-              if [ ! -d "$d" ]; \
-              then echo mkdir $d; mkdir $d; fi; )
+              if [ ! -d "$d" ]; then \
+              	 echo mkdir $d; mkdir $d; fi; )
+
+dirsGh: 
+	@$(foreach d,$(dGHub), \
+              if [ ! -d "$d" ]; then \
+              	 echo mkdir $d; mkdir $d; fi; )
 	@$(foreach d,$(dGhub),                  \
 	      if [ ! -f "$d/README.md" ]; then   \
 	         touch $d/README.md;               \
                  git add $d/README.md; fi; )
 
 ############################################################
-bashrc: dirs $(dDot)/bashrc
+bashrc: dirs $(dDot)/bashrc 
 
-$(HOME)/.bashrc:
-	@touch $@
+$(HOME)/.bashrc: ; @touch $@
 
 $(dDot)/bashrc: $(HOME)/.bashrc 
-	echo "$$BASHRC" > $@
-	@grep ". $@" $< || echo ". $@" >> $<
+	@echo "$$BASHRC" > $@
+	@(grep ". $@" $< || echo ". $@" >> $< )>/dev/null
 
-vimMac    : vimMaxInstall    $(HOME)/.vim/bundle
-vimUbuntu : vimUbuntuInstall $(HOME)/.vim/bundle
+############################################################
+vimrc: dirs $(dDot)/vimrc
 
-vimMacInstall:
+$(HOME)/.vimrc: ; @touch $@
+
+$(dDot)/vimrc: $(HOME)/.vimrc 
+	@echo "$$VIMRC" > $@
+	@(grep "source $@" $< || echo "source $@" >> $<)>/dev/null
+
+############################################################
+$(HOME)/.vim/bundle: 
+	@if [ ! -d "$@" ]; then \
+          git clone https://github.com/gmarik/Vundle.vim.git $@/Vundle.vim; fi
+	@vim +PluginInstall +qall 
+
+macVimInstall:
 	brew unlink macvim
 	brew install vim
 	brew upgrade vim
 
-vimUbubtuInstall:
-	sudo add-apt-repository ppa:jonathonf/vim
+ubuntuVimInstall:
+	sudo add-apt-repository  -y ppa:jonathonf/vim
 	sudo apt update
-	sudo apt-get upgrade vim
-
-$(HOME)/.vim/bundle: 
-	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	vim +PluginInstall +qall 
+	sudo apt-get -y upgrade vim
+	sudo apt autoclean
+	sudo apt-get clean
+	sudo apt autoremove
 	
 ############################################################
 
 aptget = if [ ! `which $(1)` ]>&2; then sudo apt-get -y install $(2); fi#
 
-ubuntu:
+ubuntuInstall: ubuntuBat ubuntuVimInstall
 	sudo apt-get -y update
 	sudo apt-get -y upgrade
 	$(call aptget,aspell,aspell)
@@ -120,8 +148,7 @@ define brew
   if [ ! `which $(1)` ] >&2; then brew install $(2); fi
 endef
 
-
-mac:
+macInstall: macVimInstall
 	@sudo easy_install pip
 	@if [ ! `which pycco`  ] >&2; then sudo -H pip install pycco; fi
 	@(call brew,aspell,aspell)
@@ -145,20 +172,22 @@ mac:
 	@(call brew,tree,tree)
 	@(call brew,wget,wget)
 
+############################################################
 tmuxs:  dirs $(HOME)/.tmux.conf $(dDot)/tmux-session1
 
 $(HOME)/.tmux.conf:
-	echo "$$TmuxConf" > $@
+	@echo "$$TmuxConf" > $@
 
 $(dDot)/tmux-session1 :
-	echo "$$TmuxSession" > $@
+	@echo "$$TmuxSession" > $@
 	
-ignore:    ; @echo "$$MacSkip$$VimSkip"          > .gitignore; git add .gitignore        
-LuaIgnore: ; @echo "$$MacSkip$$VimSkip$$LuaSkip" > .gitignore; git add .gitignore
-PyIgnore:  ; @echo "$$MacSkip$$VimSkip$$PySkip"  > .gitignore; git add .gitignore
-
-github: dirs ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt ../CODE_OF_CONDUCT.md
+############################################################
+github: dirs dirsGh ignore ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt ../CODE_OF_CONDUCT.md
 	 
+macIgnore: ; @echo "$$MacSkip$$VimSkip"          > .gitignore; git add .gitignore        
+luaIgnore: ; @echo "$$MacSkip$$VimSkip$$LuaSkip" > .gitignore; git add .gitignore
+pyIgnore:  ; @echo "$$MacSkip$$VimSkip$$PySkip"  > .gitignore; git add .gitignore
+
 ../LICENSE.md         : ; echo "$$LICENSE"  > $@; git add $@
 ../CITATION.md        : ; echo "$$CITATION" > $@; git add $@
 ../CONTRIBUTING.md    : ; echo "$$CONTRIB"  > $@; git add $@
@@ -168,6 +197,53 @@ github: dirs ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt
 #use.lua               : ; echo "$$USE"      > $@; git add $@
 #$(Tests)/use.lua      : ; echo "$$USE"      > $@; git add $@
 #$(Here)/blank.lua     : ; echo "$$BLANK"    > $@; git add $@
+
+############################################################
+define HELP
+
+Install Instructions
+====================
+
+**IMPORTANT NOTE:**
+Each of the following assumes that the step before has
+been executed before.
+
+Step1: Initial Install
+----------------------
+
+Before you do anything else, then anywhere, onetime install.
+
+	make macInstall    all # if mac 
+	make ubuntuInstall all # if ubuntu
+
+Note: this could take a few minutes.
+
+Step2: Updates
+---------------
+
+Next, if ever u have updated this Makefile and want to push out new configs
+
+	make -B all
+
+Note: this should be very fast. 
+
+Step3: Making all those Github files
+------------------------------------
+
+Next, if you u want to create all those Github files then
+check out a repo, cd into its root. Optionally, you  
+might want to write a "my.mk" file that sets some of
+the text to be written into the standrrd Github files
+(e.g., your email). Anyway, after that, type 
+
+	make github LuaIgnore # for a Lua rep
+	make github PyIgnore  # for a Python repo
+
+Note: this should be very fast. Existing files
+will not be overwritten.
+
+endef
+export HELP
 
 ############################################################
 define BASHRC
@@ -182,7 +258,7 @@ _c7="\033[36m"     # turquoise
 
 here() { cd $$1; basename "$$PWD"; }
 
-PROMPT_COMMAND='echo -ne "$${_c6}\033]0;$(here ../..)/$$(here ..)/$$(here .)\007";PS1="$${_c1}$$(here ../..)/$$_c2$$(here ..)/$$_c3$$(here .) $${_c6}\!>$${_c0}\e[m "'
+PROMPT_COMMAND='echo -ne "$$(hostname -s):$${_c6}$$(git branch 2>/dev/null | grep '^*' | colrm 1 2) \033]0;$$(here ../..)/$$(here ..)/$$(here .)\007";PS1="$${_c1}$$(here ../..)/$$_c2$$(here ..)/$$_c3$$(here .) $${_c6}\!>$${_c0}\e[m "'
 
 alias vi=vim
 alias matrix="cmatrix -bs -u 6"
@@ -194,8 +270,130 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias put='gc; git commit -am saving; git push; git status'
 alias gc="git config credential.helper 'cache --timeout=3600'"
+
+pathadd() {
+      if  [[ ":$$PATH:" != *":$$1:"* ]]; then
+          export PATH="$${PATH:+"$$PATH:"}$$1"
+      fi
+}
+pathadd ,
 endef
 export BASHRC
+
+############################################################
+define VIMRC
+
+autocmd BufEnter * silent! lcd %:p:h
+
+filetype off
+syntax on 
+filetype indent plugin on
+
+set autoindent
+set background=light
+set backspace=indent,eol,start
+
+set nobackup
+set noswapfile
+set directory=$(Tmp)
+
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set matchpairs+=<:>
+set matchtime=15
+set modelines=3
+set mouse=a
+set nocompatible
+set nohlsearch
+set ruler
+set scrolloff=3
+set showcmd
+set showmatch
+set showmode
+set smartcase
+set splitbelow
+"set syntax=on
+set title
+set ttyfast
+set visualbell
+"set number
+set wrap
+
+set matchpairs+=<:>
+
+set clipboard=unnamed
+
+set statusline=\ %F%m%r%h%w\ [%{&ff}:%Y]%=\ %l,%v\ 
+
+" Map the <Space> key to toggle a selected fold opened/closed.
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+
+"set fillchars+=vert:\
+"colorscheme torte
+"colorscheme default
+"hi VertSplit guifg=#202020 guibg=#202020 gui=NONE ctermfg=DarkGray ctermbg=DarkGray cterm=NONE
+set paste
+
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end     
+
+" show trailing whitespace chars
+set list
+set listchars=tab:>-,trail:.,extends:#,nbsp:.
+
+"Last up in this section I just fix the terminal code support so both my backspace and delete keys work as expected on OS X.
+
+" Setup term color support
+if $$TERM == "xterm-256color" || $$TERM == "screen-256color" || $$COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
+
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tbastos/vim-lua'
+Plugin 'scrooloose/vim-fugitive'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'soli/prolog-vim'
+Plugin 'majutsushi/tagbar'
+"Plugin 'valloric/youcompleteme'
+
+" Gruvbox
+" Molokai
+" Inkpot
+
+call vundle#end()
+filetype plugin indent on
+
+autocmd vimenter * NERDTree 
+autocmd VimEnter * wincmd w
+autocmd bufenter * if (winnr("$$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeWinPos = "right"
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+
+set background=dark    " Setting dark mode
+colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
+
+nmap <F8> :TagbarToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
+endef
+export VIMRC
 
 ############################################################
 define REQUIRES
