@@ -189,9 +189,9 @@ $(dDot)/tmux-session1 :
 ############################################################
 github: dirs dirsGh ignore ../LICENSE.md ../CITATION.md ../CONTRIBUTING.md ../requirements.txt ../CODE_OF_CONDUCT.md
 	 
-macIgnore: ; @echo "$$MacSkip$$VimSkip"          > .gitignore; git add .gitignore        
-luaIgnore: ; @echo "$$MacSkip$$VimSkip$$LuaSkip" > .gitignore; git add .gitignore
-pyIgnore:  ; @echo "$$MacSkip$$VimSkip$$PySkip"  > .gitignore; git add .gitignore
+macIgnore: ; @echo "$$MacSkip$$VimSkip$$JekyllSkip"          > .gitignore; git add .gitignore        
+luaIgnore: ; @echo "$$MacSkip$$VimSkip$$JekyllSkip$$LuaSkip" > .gitignore; git add .gitignore
+pyIgnore:  ; @echo "$$MacSkip$$VimSkip$$JekyllSkip$$PySkip"  > .gitignore; git add .gitignore
 
 ../LICENSE.md         : ; echo "$$LICENSE"  > $@; git add $@
 ../CITATION.md        : ; echo "$$CITATION" > $@; git add $@
@@ -225,11 +225,12 @@ a few minutes I can be up and running in my kinda envrionment:
           python3, swi-prolog, etc
 - And some silly things: cmatrix, bsdgames (unix only), etc
 
-I also add "," to the PATH so any directory can have a local
-set of executables in `,/`.
+I also add "../bin" to the PATH so any directory can have a local
+set of executables in a sibling `../bin` directory.
 
-To achieve all this, code adds stuff (without overriding) to 
-`.bashrc`, `.vimrc`, `.tmux.config`. 
+To achieve all this, my configs are written to ~/.config/dot
+which contains files are that loaded from
+`~/.bashrc`, `~/.vimrc`, `~/.tmux.config`. 
 
 It also creates `~/.config/dot` for all its local config files
 
@@ -481,6 +482,16 @@ luac.out
 *.hex
 endef
 export LuaSkip
+
+############################################################
+define JekyllSkip
+### Jekyll ###
+_site
+.sass-cache
+.jekyll-metadata
+Gemfile.lock
+endef
+export JekyllSkip
 
 ############################################################
 define VimSkip
