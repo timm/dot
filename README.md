@@ -1,54 +1,69 @@
-# Easy Install for all my Unix Config Files
+About DOT
+=========
 
-_Problem:_ Jumping between containers, want a quick set up in each new environment.
+This Makefile contains all the config tricks that are global to all my
+Mac and Unix installations as well all my Github repos.
 
-_Solution:_ 
+The goal here is that if ever I land on a new machine or an empty Ubuntu
+container, I can download this Makefile, do the following, then in just
+a few minutes I can be up and running in my kinda envrionment:
 
-- Get everything sorted into `bashrc` then make it autoinstall
-- Built for Codeanywhere  and Mac but should work in most Ububtuu 16.0+ envionments
+- Some cool tricks for:
+	- mux, vim8, bash and git
+- Some standard packages installed: 
+	- apsell, bat, ctags, htop, mc, ncdu, pycco, ranger, tmux, 
+	  tree, vim8, wget, etc.
+- My favorite languages installed: 
+	- clisp, gnuplot, gnu-smalltalk, lua, luajit, python-pip, 
+          python3, swi-prolog,
+- And some silly things: cmatrix, bsdgames (unix only),
 
+I also add "," to the PATH so any directory can have a local
+set of executables in `,/`.
 
-## Installation
+To achieve all this, code adds stuff (without overriding) to 
+`.bashrc`, `.vimrc`, `.tmux.config`. 
 
-    cd dot
-    . bashrc
+It also creates `~/.config/dot` for all its local config files
 
-After that, it should just all work, everytime you log in.
+Lastly, it esnures that ~/.vim/bundle contains the VIM package manager.
 
-## Internals
+Install Instructions
+====================
 
-- Bash config attached to `dot/bashrc`
-     - Offers many services including the _Extras_ shown below.
-- Vim config files linked to `dot/vimrc`
-     - Also, Vim package manager enabled.
-     - Mouse support enabled
-     - Long list of colorschemes installed
-     - Nerdtree file browser installed
-     - And other tricks as well
-- Tmux config files linked to `dot/tmux.conf`   
-     - Mouse support enabled
-     - Prefix set to "control-space"
-     - Vertical split set to "control-space |"
-     - Horizontal  split set to "control-space _"
-     - Fast pane navigation enables with alt-arrow
+**IMPORTANT NOTE:** Each of the following assumes that the step before
+has been executed before.
 
-## Extras
+Step1: Initial Install
+----------------------
 
-Installs:
+Before you do anything else, then anywhere, onetime install.
 
-- Get the latest version of "vim" with `vim0`.
-      - Not yet working for Mac.
-- Get the cool "cat" replacement with `bat0` (UNIX) or `mac-bat0` (for Mac)
+	make macInstall    all # if mac 
+	make ubuntuInstall all # if ubuntu
 
-System management:
+Note: this could take a few minutes.
 
-- Pretty display of current directory contents `ll`.
-- Free up disk space with `clean` (for UNIX).
+Step2: Updates
+---------------
 
-Git tools:
+Next, if ever u have updated this Makefile and want to push out new
+configs
 
-- Save your git passwords (for 1 hour) with `gc` (saves typing when committing code).
-- Easy update current git repo with `get`,
-- Easy commit of  current git repo with `put`,
-- Easy commits for all your git repos with `puts`.
-  (use the `GITS` variable in `bashrc`  to define where those repos are).
+	make -B all
+
+Note: this should be very fast. 
+
+Step3: Making all those Github files
+------------------------------------
+
+Next, if you u want to create all those Github files then check out a
+repo, cd into its root. Optionally, you might want to write a "my.mk"
+file that sets some of the text to be written into the standrrd Github
+files (e.g., your email). Anyway, after that, type
+
+	make github LuaIgnore # for a Lua rep
+	make github PyIgnore  # for a Python repo
+
+Note: this should be very fast. Existing files will not be overwritten.
+
