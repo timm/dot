@@ -309,7 +309,7 @@ pathadd() {
           export PATH="$${PATH:+"$$PATH:"}$$1"
       fi
 }
-pathadd ,
+pathadd ../bin
 endef
 export BASHRC
 
@@ -859,6 +859,7 @@ export USE
 define TmuxSession
 split-window -h -p 33 "htop"
 split-window -v -p 83 
+send-keys "ranger" C-m
 split-window "mc -x"
 rename-window "main"
 new-window 
