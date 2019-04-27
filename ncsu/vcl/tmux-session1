@@ -1,0 +1,11 @@
+send-keys  "bash -i" C-m
+split-window -h -p 33 "htop"
+split-window -v -p 83 "bash --init-file  $Dot/dotbashrc -i"
+send-keys "matrix" C-m
+split-window "mc -x -S gotar.ini"
+rename-window "main"
+new-window 
+rename-window "news"
+split-window -h  -p 50  "bash -i"
+rename-window "other"
+last-window
