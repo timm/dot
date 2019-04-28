@@ -4,6 +4,8 @@ mkdir -p $HOME/tmp
 
 export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
+. $Dot/git0
+
 _c0="\033[00m"     # white
 _c1="\033[01;32m"  # green
 _c2="\033[01;34m"  # blue

@@ -5,7 +5,7 @@ get="sudo apt -qq -y "
 
 files() {
   local web='https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl'
-  for f in timmnix dotbashrc dottmux dotvimrc tmux-session1 ; do
+  for f in git0 timmnix.sh timmnix dotbashrc dottmux dotvimrc tmux-session1 ; do
     if [ ! -f "$f" ]; then
       wget -O $f $web/$f
     fi
@@ -20,10 +20,12 @@ os() {
 }
 
 julia11() {
-	mkdir -p $HOME/opt/julia
-	cd $HOME/opt/julia
-	wget -O julia1.1.0.tar.gz https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-1.1.0-linux-x86_64.tar.gz
-	tar xzf julia1.1.0.tar.gz
+	mkdir -p $Dot/../opt/julia
+	cd $Dot/../opt/julia
+	if [ ! -f "julia1.1.0.tar.gz" ]; then
+	   wget -O julia1.1.0.tar.gz https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-1.1.0-linux-x86_64.tar.gz
+	   tar xzf julia1.1.0.tar.gz
+        fi
 }
 lots() {
   $get install vim aspell clisp ctags gawk gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip 
@@ -31,9 +33,11 @@ lots() {
   $get install haskell-platform pandoc
   #sudo npm install -g typescript
   #sudo npm install -g codescript
-  curl https://bootstrap.pypa.io/get-pip.py -o $HOME/get-pip.py
-  sudo python $HOME/get-pip.py
-  rm $HOME/get-pip.py
+  if [ ! `which pip` ]>&2; then
+     curl https://bootstrap.pypa.io/get-pip.py -o $HOME/get-pip.py
+     sudo python $HOME/get-pip.py
+     rm $HOME/get-pip.py
+  fi
   sudo -H pip install --upgrade pip
   $get install python3 swi-prolog tmux tree wget source-highlight
   # lit programming stuff
@@ -42,9 +46,11 @@ lots() {
 
 fun() {
   $get  install bsdgames cmatrix
-  sudo add-apt-repository   -y ppa:ytvwld/asciiquarium > /dev/null
-  $get update 
-  $get install asciiquarium
+  if [ ! `which asciiquarium` ]>&2; then
+    sudo add-apt-repository   -y ppa:ytvwld/asciiquarium > /dev/null
+    $get update 
+    $get install asciiquarium
+  fi
 }
 
 bashing() {
@@ -66,7 +72,7 @@ vundle() {
     mkdir -p $d
     git clone https://github.com/gmarik/Vundle.vim.git $d
   fi
-  vim -u dotvimrc +PluginInstall +qall 
+  vim -u "$Dot/dotvimrc" +PluginInstall +qall 
 }
 
 set -x
