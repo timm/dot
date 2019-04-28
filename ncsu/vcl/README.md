@@ -82,9 +82,9 @@ The second window shows for text games in four panes:
 - better colors enabled
 - pane seperator colors muted
 - Vundle package manager installed, which in turn lets me install:
-      - `nerdtree`
-      - various color schemes
-      - and other cool stuff
+     - `nerdtree`
+     - various color schemes
+     - and other cool stuff
 - etc
 
 ## Installation
