@@ -42,6 +42,9 @@
 ### A Better Tmux
 
 Tmux lets you have multiple resizable text panes inside multiple windows.
+If the net conenction goes down, `tmux` saves
+the session and you can start up, just where you were, using `tmux attach`.
+
 For example, where are two windows. The first shows:
 
 - top left: some Vim text editting with a little file treel
@@ -50,11 +53,11 @@ For example, where are two windows. The first shows:
 - middle-right: a shell for bash commands
 - bottom-right: the midnight commander file manager
 
-<a href="work.png"><img src="work.png" width=600></a>
+<a href="work.png"><img src="work.png" width=800></a>
 
 The second window shows for text games in four panes:
 
-<a href="play.png"><img src="play.png" width=600></a>
+<a href="play.png"><img src="play.png" width=800></a>
 
 ### A Better VIM
 
@@ -121,4 +124,13 @@ If you see something like the following errors, just ignore them:
 - Log out then login again
 - Or do `. $HOME/.bashrc`
 
+### Step5: Test
+
+1. Run the command `tmux`. Ignore any errors you see.
+2. Press control-space. Then press shift-S. You should then see something like the above screenshots.
+3. Try grabbing a pane boundary with the mouse.
+   Check that you can resize soemthing.
+4. Leave tmux  by pressing control-space. Then
+   press d. This should take you back to the shell.
+5. Return to your old tmux session. Run `tmux attach`. Check you can see you resized pane.
 
