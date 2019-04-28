@@ -23,7 +23,7 @@ lots() {
   $get install haskell-platform pandoc
   #sudo npm install -g typescript
   sudo -H pip install --upgrade pip
-  $get install python3 swi-prolog tmux tree wget
+  $get install python3 swi-prolog tmux tree wget source-highlight
   # lit programming stuff
   sudo -H pip install pycco
 }
