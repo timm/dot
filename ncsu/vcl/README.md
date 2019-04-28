@@ -3,6 +3,27 @@
 
 ## What this gives you
 
+### A Better Work Environment (with Tmux)
+
+Tmux lets you have multiple resizable text panes inside multiple windows.
+If the net conenction goes down, `tmux` saves
+the session and you can start up, just where you were, using `tmux attach`.
+
+For example, where are two windows. The first shows:
+
+- top left: some Vim text editting with a little file treel
+- bottom right: the Julia interpreter running
+- top right: the `htop` system monitor
+- middle-right: a shell for bash commands
+- bottom-right: the midnight commander file manager
+
+<a href="work.png"><img src="work.png" width=800></a>
+
+The second window shows for text games in four panes:
+
+<a href="play.png"><img src="play.png" width=800></a>
+
+
 ### Lottsa pre- stuff installed
 
 
@@ -38,26 +59,6 @@
 - Simpler version control for git
      - get = `git pull`
      - put = `git commit -am saving; git push; git status`
-
-### A Better Tmux
-
-Tmux lets you have multiple resizable text panes inside multiple windows.
-If the net conenction goes down, `tmux` saves
-the session and you can start up, just where you were, using `tmux attach`.
-
-For example, where are two windows. The first shows:
-
-- top left: some Vim text editting with a little file treel
-- bottom right: the Julia interpreter running
-- top right: the `htop` system monitor
-- middle-right: a shell for bash commands
-- bottom-right: the midnight commander file manager
-
-<a href="work.png"><img src="work.png" width=800></a>
-
-The second window shows for text games in four panes:
-
-<a href="play.png"><img src="play.png" width=800></a>
 
 ### A Better VIM
 
