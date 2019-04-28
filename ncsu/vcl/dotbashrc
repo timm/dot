@@ -28,6 +28,12 @@ alias put='gc; git commit -am saving; git push; git status'
 alias tmux="cd $Dot/..; tmux -f $Dot/dottmux"
 alias vi="vim -u $Dot/dotvimrc"
 
+bashing() {
+  Bashrc=$Dot/dotbashrc
+  There=$HOME/.bashrc
+  (grep ". $Bashrc" $There || echo ". $Bashrc" >> $There )>/dev/null
+}
+
 
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS='--quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4 -R '
@@ -48,3 +54,4 @@ pathadd() {
       fi
 }
 pathadd ../bin
+bashing

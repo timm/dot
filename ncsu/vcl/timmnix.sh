@@ -1,7 +1,7 @@
 trap "set +x" 0 1 2 3 9 15
 export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
-get="sudo apt-get -qq -y "
+get="sudo apt -qq -y "
 
 files() {
   local web='https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl'
@@ -18,10 +18,11 @@ os() {
 }
 
 lots() {
-  $get install aspell clisp ctags gawk gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip pfyd
+  $get install vim aspell clisp ctags gawk gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip pfyd
   $get install nodejs npm
   $get install haskell-platform pandoc
   #sudo npm install -g typescript
+  #sudo npm install -g codescript
   sudo -H pip install --upgrade pip
   $get install python3 swi-prolog tmux tree wget source-highlight
   # lit programming stuff
