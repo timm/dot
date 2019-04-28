@@ -19,12 +19,21 @@ os() {
   $get upgrade
 }
 
+julia11() {
+	mkdir -p $HOME/opt/julia
+	cd $HOME/opt/julia
+	wget -O julia1.1.0.tar.gz https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-1.1.0-linux-x86_64.tar.gz
+	tar xzf julia1.1.0.tar.gz
+}
 lots() {
   $get install vim aspell clisp ctags gawk gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip pfyd
   $get install nodejs npm
   $get install haskell-platform pandoc
   #sudo npm install -g typescript
   #sudo npm install -g codescript
+  curl https://bootstrap.pypa.io/get-pip.py -o $HOME/get-pip.py
+  sudo python $HOME/get-pip.py
+  rm $HOME/get-pip.py
   sudo -H pip install --upgrade pip
   $get install python3 swi-prolog tmux tree wget source-highlight
   # lit programming stuff
@@ -61,11 +70,12 @@ vundle() {
 }
 
 set -x
-files
-os
-lots
-fun
+files; os;
+lots; fun;
+julia11
 bashing
-vim8
-vundle
+vim8; vundle
+sudo apt autoclean
+sudo apt clean
+sudo apt autoremove
 set +x 
