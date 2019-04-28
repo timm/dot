@@ -87,7 +87,17 @@ The second window shows for text games in four panes:
      - and other cool stuff
 - etc
 
-## Installation
+## How to Use
+
+Run the install instructions, below. Only do this once
+
+Then, each time you log in, then run...
+
+```sh
+. $HOME/timmnix
+```
+
+## Installation (Only Do Once)
 
 In this install, all config files are written to EOS space
 (since, in VCL, everything in the login directories are reset every login).

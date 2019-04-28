@@ -5,11 +5,13 @@ get="sudo apt -qq -y "
 
 files() {
   local web='https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl'
-  for f in dotbashrc dottmux dotvimrc tmux-session1 ; do
+  for f in timmnix dotbashrc dottmux dotvimrc tmux-session1 ; do
     if [ ! -f "$f" ]; then
       wget -O $f $web/$f
     fi
   done
+  cp timmnix $HOME
+  chmod +x $HOME/timmnix
 }
 
 os() {
