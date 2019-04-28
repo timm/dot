@@ -1,11 +1,9 @@
-
-. ./dot
+export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
 get="sudo apt-get -qq -y "
-set -x
 
 files() {
-  for f in  dot dotbashrc dottmux dotvimrc  tmux-session1 ; do
+  for f in  dotbashrc dottmux dotvimrc tmux-session1 ; do
     if [ ! -f "$f" ]; then
       wget https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl/$f
     fi
@@ -52,6 +50,7 @@ vundle() {
   vim +PluginInstall +qall 
 }
 
+set -x
 files
 os
 lots
