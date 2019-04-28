@@ -3,15 +3,75 @@
 
 ## What this gives you
 
-### Lottsa stuff installed
+### Lottsa pre- stuff installed
+
+
+- Documentation: 
+     - apsell, pandoc, pycco
+- Editting: 
+     - vim8 with Nertree and other cool tools.
+- File management: 
+     - mc, tree, wget
+- Fun: 
+     - bsdgames, cmatric, asciiquarium
+- Languages: 
+     - clisp, gawk, gnu-smalltalk, javascript, haskell, lua, luajit, python, python3, swi-prolog
+- Plotting:
+     - gnuplot
+- Programming utitlies: 
+     - pip
+     - ctag
+- Session management:
+     - tmux
+- System monitoring: 
+     - htop, ncdu, pfyd
 
 ### A Better Shell
 
+- Command line prompts that show:
+     - current git branch
+     - just the top 3 directories 
+     - hostname
+- Tools that know how tor ead their config files from persistent disk memory
+     - tmux
+     - vim
+- Simpler version control for git
+     - get = `git pull`
+     - put = `git commit -am saving; git push; git status`
+
 ### A Better Tmux
+
+Tmux lets you have multiple resizable text panes inside multiple windows.
+For example, where are two windows. The first shows:
+
+- top left: some Vim text editting with a little file treel
+- bottom right: the Julia interpreter running
+- top right: the `htop` system monitor
+- middle-right: a shell for bash commands
+- bottom-right: the midnight commander file manager
+
+<a href="work.png"><img src="work.png" width=600></a>
+
+The second window shows for text games in four panes:
+
+<a href="play.png"><img src="play.png" width=600></a>
 
 ### A Better VIM
 
- 
+Vim8, of course, with
+
+- config files written to persistent part of disk memory
+- syntax highlighting
+- incremental search (with highlighting)
+- a better status line
+- better colors enabled
+- pane seperator colors muted
+- Vundle package manager installed, which in turn lets me install:
+      - nerdtree
+      - various color schemes
+      - and other cool stuff
+- etc
+
 ## Installation
 
 In this install, all config files are written to EOS space
