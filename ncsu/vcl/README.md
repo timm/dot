@@ -27,11 +27,11 @@ For an exaple of this environment in action, here are two windows. The first sho
 - middle-right: a shell for bash commands
 - bottom-right: the midnight commander file manager
 
-<center><a href="work.png"><img src="work.png" width=800></a></center>
+<center><a href="work.png"><img src="work.png" width=900></a></center>
 
 The second window shows for text games in four panes:
 
-<center><a href="play.png"><img src="play.png" width=800></a></center>
+<center><a href="play.png"><img src="play.png" width=900></a></center>
 
 
 <table>
