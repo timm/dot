@@ -1,3 +1,5 @@
+# need to seperate this into image and afs
+
 trap "set +x" 0 1 2 3 9 15
 export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
