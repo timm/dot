@@ -1,10 +1,23 @@
 # Timm's NCSU VCL set up
 
 
+## What this gives you
 
+### Lottsa stuff installed
+
+### A Better Shell
+
+### A Better Tmux
+
+### A Better VIM
+
+ 
 ## Installation
 
-- Set up git
+In this install, all config files are written to EOS space
+(since, in VCL, everything in the login directories are reset every login).
+
+_Step1:_ Set up git
 
 ```sh
 # replace UPPER case words with your details
@@ -16,18 +29,20 @@ git config --global user.email "MY_NAME@EXAMPLE.COM"
 git config --global push.default simple
 ```
 
-- Cd into your eos file space. 
+_Step2:_ Cd into your eos file space. 
 
+```sh
 # replace U/USERNAME with 1st letter of username, then username
 # e.g. cd /afs/unity.ncsu.edu/users/t/tjmenzie
 
-```sh
 cd /afs/unity.ncsu.edu/users/U/USERNAME
 ```
 
-- Make a config directory
-- Download timmnix.sh
-- Run timmnix.sh
+_Step3:_ For the conf directory:
+
+- First make that director
+- Then download timmnix.sh
+- Then run `timmnix.sh`
 
 ```sh
 mkdir .config
@@ -36,8 +51,9 @@ wget -O timmnix.sh https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl/ti
 bash timmnix.sh
 ```
 
-- Then relaunch bash to get everything 
-     - log out then login again
-     - or do `. $HOME/.bashrc`
+_Step4:_ Then relaunch bash to get everything 
+
+- log out then login again
+- or do `. $HOME/.bashrc`
 
 
