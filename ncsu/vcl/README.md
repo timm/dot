@@ -17,7 +17,7 @@
 In this install, all config files are written to EOS space
 (since, in VCL, everything in the login directories are reset every login).
 
-_Step1:_ Set up git
+### Step1: Set up git
 
 ```sh
 # replace UPPER case words with your details
@@ -29,7 +29,7 @@ git config --global user.email "MY_NAME@EXAMPLE.COM"
 git config --global push.default simple
 ```
 
-_Step2:_ Cd into your eos file space. 
+### Step2: Cd into your eos file space. 
 
 ```sh
 # replace U/USERNAME with 1st letter of username, then username
@@ -38,7 +38,7 @@ _Step2:_ Cd into your eos file space.
 cd /afs/unity.ncsu.edu/users/U/USERNAME
 ```
 
-_Step3:_ For the conf directory:
+### Step3: For the conf directory:
 
 - First make that director
 - Then download timmnix.sh
@@ -51,9 +51,14 @@ wget -O timmnix.sh https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl/ti
 bash timmnix.sh
 ```
 
-_Step4:_ Then relaunch bash to get everything 
+If you see something like the following errors, just ignore them:
 
-- log out then login again
-- or do `. $HOME/.bashrc`
+- E: Unable to change to /afs/unity.ncsu.edu/users/t/tjmenzie/.config/ - chdir (13: Permission denied)
+- DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020.
+
+### Step4: Then relaunch bash to get everything 
+
+- Log out then login again
+- Or do `. $HOME/.bashrc`
 
 
