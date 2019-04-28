@@ -26,7 +26,7 @@ julia11() {
 	tar xzf julia1.1.0.tar.gz
 }
 lots() {
-  $get install vim aspell clisp ctags gawk gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip pfyd
+  $get install vim aspell clisp ctags gawk gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip 
   $get install nodejs npm
   $get install haskell-platform pandoc
   #sudo npm install -g typescript
