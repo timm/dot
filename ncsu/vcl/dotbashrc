@@ -50,7 +50,11 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 commit() {
-	(cd $Dot/../gits/timm/dot/ncsu/vcl; make)
+	(cd $Dot/../gits/timm/dot/ncsu/vcl
+	cp $Dot/* .
+	git add *
+	git commit -am saving
+	git push)
 }
 pathadd() {
       if  [[ ":$PATH:" != *":$1:"* ]]; then
