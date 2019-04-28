@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
@@ -24,7 +25,7 @@ alias ls='ls --color'
 alias matrix="cmatrix -b -u 6"
 alias mc='mc -x'
 alias put='gc; git commit -am saving; git push; git status'
-alias tmux="tmux -f $Dot/dottmux"
+alias tmux="cd $Dot/..; tmux -f $Dot/dottmux"
 alias vi="vim -u $Dot/dotvimrc"
 
 pathadd() {

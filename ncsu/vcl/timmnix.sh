@@ -18,7 +18,10 @@ os() {
 }
 
 lots() {
-  $get install aspell clisp ctags gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip 
+  $get install aspell clisp ctags gawk gnuplot gnu-smalltalk htop luajit lua5.2 mc ncdu python-pip pfyd
+  $get install nodejs npm
+  $get install haskell-platform pandoc
+  #sudo npm install -g typescript
   sudo -H pip install --upgrade pip
   $get install python3 swi-prolog tmux tree wget
   # lit programming stuff
@@ -27,7 +30,7 @@ lots() {
 
 fun() {
   $get  install bsdgames cmatrix
-  sudo add-apt-repository  -y ppa:ytvwld/asciiquarium
+  sudo add-apt-repository   -y ppa:ytvwld/asciiquarium > /dev/null
   $get update 
   $get install asciiquarium
 }
@@ -39,7 +42,7 @@ bashing() {
 }
 
 vim8() {
-  sudo add-apt-repository  -y ppa:jonathonf/vim
+  sudo add-apt-repository   -y ppa:jonathonf/vim > /dev/null
   $get update
   $get upgrade vim
 }
@@ -56,10 +59,10 @@ vundle() {
 
 set -x
 files
-#os
-#lots
-#fun
-#bashing
-#vim8
+os
+lots
+fun
+bashing
+vim8
 vundle
 set +x 
