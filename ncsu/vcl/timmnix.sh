@@ -1,11 +1,13 @@
+trap "set +x" 0 1 2 3 9 15
 export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
 get="sudo apt-get -qq -y "
 
 files() {
-  for f in  dotbashrc dottmux dotvimrc tmux-session1 ; do
+  local web='https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl'
+  for f in dotbashrc dottmux dotvimrc tmux-session1 ; do
     if [ ! -f "$f" ]; then
-      wget https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl/$f
+      wget -O $f $web/$f
     fi
   done
 }
@@ -43,18 +45,21 @@ vim8() {
 }
 
 vundle() {
-  mkdir -p $Dot/vim/bundle
   mkdir -p $Dot/tmp
-  cd $Dot/vim/bundle
-  git clone https://github.com/gmarik/Vundle.vim.git
-  vim +PluginInstall +qall 
+  local d="$Dot/vim/bundle"
+  if [ ! -d "$d" ]; then
+    mkdir -p $d
+    git clone https://github.com/gmarik/Vundle.vim.git $d
+  fi
+  vim -u dotvimrc +PluginInstall +qall 
 }
 
 set -x
 files
-os
-lots
-fun
-bashing
-vim8
+#os
+#lots
+#fun
+#bashing
+#vim8
 vundle
+set +x 
