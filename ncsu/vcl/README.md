@@ -1,3 +1,5 @@
+<img align=right src="http://gentlebytes.com/images/home/product-appledoc.png" width=400>
+
 # Timm's NCSU VCL set up
 
 
