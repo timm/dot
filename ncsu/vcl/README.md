@@ -2,6 +2,14 @@
 
 # Timm's NCSU VCL set up
 
+NCSU's VCL facility is nice, but it has some interesting quirks. For example:
+
+- Everytime you log back into an image to `$HOME`, its a fresh copy of that image;
+- So for persistent file storage, VCL users have a seperate file storage space over in (e.g.) `/afs/unity.ncsu.edu/users/t/tjmenzie`. 
+
+This makes installations... interesting. The following code adds lots of cool tool, then writes the
+config files to (e.g.) `/afs/unity.ncsu.edu/users/t/tjmenzie/.config`.
+
 
 ## What this gives you
 
@@ -13,8 +21,8 @@ the session and you can start up, just where you were, using `tmux attach`.
 
 For example, where are two windows. The first shows:
 
-- top left: some Vim text editting with a little file treel
-- bottom right: the Julia interpreter running
+- top left: some `vim` text editting with a little file treel
+- bottom right: the `Julia` interpreter running
 - top right: the `htop` system monitor
 - middle-right: a shell for bash commands
 - bottom-right: the midnight commander file manager
@@ -30,42 +38,42 @@ The second window shows for text games in four panes:
 
 
 - Documentation: 
-     - apsell, pandoc, pycco
+     - `apsell`, `pandoc`, `pycco`
 - Editting: 
-     - vim8 with Nertree and other cool tools.
+     - `vim8` with `Nerdtree` and other cool tools.
 - File management: 
-     - mc, tree, wget
+     - `mc`, `tree`, `wget`
 - Fun: 
-     - bsdgames, cmatric, asciiquarium
+     - `bsdgames`, `cmatric`, `asciiquarium`
 - Languages: 
-     - clisp, gawk, gnu-smalltalk, javascript, haskell, lua, luajit, python, python3, swi-prolog
+     - `clisp`, `gawk`, `gnu-smalltalk`, `javascript`, `haskell`, `lua`, `luajit`, `python`, `python3`, `swi-prolog`
 - Plotting:
-     - gnuplot
+     - `gnuplot`
 - Programming utitlies: 
-     - pip
-     - ctag
+     - `pip`
+     - `ctag`
 - Session management:
-     - tmux
+     - `tmux`
 - System monitoring: 
-     - htop, ncdu, pfyd
+     - `htop`, `ncdu`, `pfyd`
 
 ### A Better Shell
 
 - Syntax highlighting added to the `less` pager
 - Command line prompts that show:
-     - current git branch
+     - current `git` branch
      - just the top 3 directories 
      - hostname
 - Tools that know how tor ead their config files from persistent disk memory
-     - tmux
-     - vim
-- Simpler version control for git
+     - `tmux`
+     - `vim`
+- Simpler version control for `git`
      - get = `git pull`
      - put = `git commit -am saving; git push; git status`
 
 ### A Better VIM
 
-Vim8, of course, with
+`Vim8`, of course, with
 
 - config files written to persistent part of disk memory
 - syntax highlighting
@@ -74,7 +82,7 @@ Vim8, of course, with
 - better colors enabled
 - pane seperator colors muted
 - Vundle package manager installed, which in turn lets me install:
-      - nerdtree
+      - `nerdtree`
       - various color schemes
       - and other cool stuff
 - etc
@@ -133,8 +141,8 @@ If you see something like the following errors, just ignore them:
 1. Run the command `tmux`. Ignore any errors you see.
 2. Press control-space. Then press shift-S. You should then see something like the above screenshots.
 3. Try grabbing a pane boundary with the mouse.
-   Check that you can resize soemthing.
-4. Leave tmux  by pressing control-space. Then
-   press d. This should take you back to the shell.
-5. Return to your old tmux session. Run `tmux attach`. Check you can see you resized pane.
+   Check that you can resize something.
+4. Leave tmux  by pressing `control-space`. Then
+   press `d`. This should take you back to the shell.
+5. Return to your old `tmux` session. Run `tmux attach`. Check you can see you resized pane.
 
