@@ -19,7 +19,7 @@ Tmux lets you have multiple resizable text panes inside multiple windows.
 If the net conenction goes down, `tmux` saves
 the session and you can start up, just where you were, using `tmux attach`.
 
-For example, where are two windows. The first shows:
+For an exaple of this environment in action, here are two windows. The first shows:
 
 - top left: some `vim` text editting with a little file treel
 - bottom right: the `Julia` interpreter running
@@ -27,11 +27,11 @@ For example, where are two windows. The first shows:
 - middle-right: a shell for bash commands
 - bottom-right: the midnight commander file manager
 
-<a href="work.png"><img src="work.png" width=800></a>
+<center><a href="work.png"><img src="work.png" width=800></a></center>
 
 The second window shows for text games in four panes:
 
-<a href="play.png"><img src="play.png" width=800></a>
+<center><a href="play.png"><img src="play.png" width=800></a></center>
 
 
 <table>
