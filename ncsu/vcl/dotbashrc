@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+mkdir -p $HOME/tmp
+
 export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
 _c0="\033[00m"     # white

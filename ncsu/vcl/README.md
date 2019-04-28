@@ -44,45 +44,29 @@ The second window shows for text games in four panes:
 </ul>
 </li>
 <li>Editting:
-<ul>
-<li><code>vim8</code> with <code>Nerdtree</code> and other cool tools.</li>
-</ul>
+<code>vim8</code> with <code>Nerdtree</code> and other cool tools.
 </li>
 <li>File management:
-<ul>
-<li><code>mc</code>, <code>tree</code>, <code>wget</code></li>
-</ul>
+<code>mc</code>, <code>tree</code>, <code>wget</code>
 </li>
 <li>Fun:
-<ul>
-<li><code>bsdgames</code>, <code>cmatric</code>, <code>asciiquarium</code></li>
-</ul>
+<code>bsdgames</code>, <code>cmatric</code>, <code>asciiquarium</code>
 </li>
 <li>Languages:
-<ul>
-<li><code>clisp</code>, <code>gawk</code>, <code>gnu-smalltalk</code>, <code>javascript</code>, <code>haskell</code>, <code>lua</code>, <code>luajit</code>, <code>python</code>, <code>python3</code>, <code>swi-prolog</code></li>
-</ul>
+<code>clisp</code>, <code>gawk</code>, <code>gnu-smalltalk</code>, <code>javascript</code>, <code>haskell</code>, <code>lua</code>, <code>luajit</code>, <code>python</code>, <code>python3</code>, <code>swi-prolog</code>
 </li>
 <li>Plotting:
-<ul>
-<li><code>gnuplot</code></li>
-</ul>
+<code>gnuplot</code>
 </li>
 <li>Programming utilities:
-<ul>
-<li><code>pip</code></li>
-<li><code>ctag</code></li>
-</ul>
+<code>pip</code>,
+<code>ctag</code>
 </li>
 <li>Session management:
-<ul>
-<li><code>tmux</code></li>
-</ul>
+<code>tmux</code>
 </li>
 <li>System monitoring:
-<ul>
-<li><code>htop</code>, <code>ncdu</code>, <code>pfyd</code></li>
-</ul>
+<code>htop</code>, <code>ncdu</code>, <code>pfyd</code>
 </li>
 </ul>
 </td>
@@ -91,19 +75,15 @@ The second window shows for text games in four panes:
 <ul>
 <li>Syntax highlighting added to the <code>less</code> pager</li>
 <li>Command line prompts that show:
-<ul>
-<li>current <code>git</code> branch</li>
-<li>just the top 3 directories</li>
-<li>hostname</li>
-</ul>
+current <code>git</code> branch;
+just the top 3 directories;
+hostname.
 </li>
-<li>Tools that know how tor ead their config files from persistent disk memory
-<ul>
-<li><code>tmux</code></li>
-<li><code>vim</code></li>
-</ul>
+<li>Tools that know how to read their config files from persistent disk memory:
+<code>tmux</code>,
+<code>vim</code>
 </li>
-<li>Simpler version control for <code>git</code>
+<li>Simpler <code>git</code> control
 <ul>
 <li>get = <code>git pull</code></li>
 <li>put = <code>git commit -am saving; git push; git status</code></li>
@@ -113,30 +93,28 @@ The second window shows for text games in four panes:
 </td>
 <td valign=top>
 <h3><a id="user-content-a-better-vim" class="anchor" aria-hidden="true" href="#a-better-vim"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A Better VIM</h3>
-<p><code>Vim8</code>, of course, with</p>
-<ul>
-<li>config files written to persistent part of disk memory</li>
-<li>syntax highlighting</li>
-<li>incremental search (with highlighting)</li>
-<li>a better status line</li>
-<li>better colors enabled</li>
-<li>pane seperator colors muted</li>
-<li>Vundle package manager installed, which in turn lets me install:
+<p><code>Vim8</code>, of course, with
+config files written to persistent part of disk memory.
+<p>My Vim includes
+syntax highlighting,
+incremental search (with highlighting),
+a better status line,
+better colors enabled,
+pane seperator colors muted.
+<p>My Vim also includes
+the Vundle package manager installed, which in turn lets me install:
 <ul>
 <li><code>nerdtree</code></li>
 <li>various color schemes</li>
 <li>and other cool stuff</li>
 </ul>
-</li>
-<li>etc</li>
-</ul>
 </td></tr></table>
 
 ## How to Use
 
-Run the install instructions, below. Only do this once
+Run the install instructions, below. Only do that once
 
-Then, each time you log in, then run...
+Then, each time you log in, in the log directory, run...
 
 ```sh
 . $HOME/timmnix
