@@ -35,36 +35,7 @@ The second window shows for text games in four panes:
 
 
 <table>
-<tr><td valign=top>
-<h3><a id="user-content-lottsa-pre--stuff-installed" class="anchor" aria-hidden="true" href="#lottsa-pre--stuff-installed"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Also, pre-installed...</h3>
-<p>Documentation tools:
-<code>apsell</code>, <code>pandoc</code>, <code>pycco</code>.
-
-<p>Editting tools:
-<code>vim8</code> with <code>Nerdtree</code> and other cool tools.
-<p>File management tools:
-<code>mc</code>, <code>tree</code>, <code>wget</code>.
-
-<p>Fun:
-<code>bsdgames</code>, <code>cmatric</code>, <code>asciiquarium</code>.
-
-<p>Languages:
-<code>clisp</code>, <code>gawk</code>, <code>gnu-smalltalk</code>, <code>javascript</code>, <code>haskell</code>, <code>lua</code>, <code>luajit</code>, <code>python</code>, <code>python3</code>, <code>swi-prolog</code>.
-
-<p>Plotting:
-<code>gnuplot</code>.
-
-<p>Programming utilities:
-<code>pip</code>,
-<code>ctag</code>.
-
-<p>Session management tools:
-<code>tmux</code>.
-
-<p>System monitoring:
-<code>htop</code>, <code>ncdu</code>, <code>pfyd</code>.
-
-</td>
+<tr>
 <td valign=top>
 <h3><a id="user-content-a-better-shell" class="anchor" aria-hidden="true" href="#a-better-shell"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>And a Better Shell</h3>
 
@@ -103,7 +74,38 @@ the Vundle package manager installed, which in turn lets me install:
 <li>various color schemes</li>
 <li>and other cool stuff</li>
 </ul>
-</td></tr></table>
+</td>
+<td valign=top>
+<h3><a id="user-content-lottsa-pre--stuff-installed" class="anchor" aria-hidden="true" href="#lottsa-pre--stuff-installed"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Also, pre-installed...</h3>
+<p>Documentation tools:
+<code>apsell</code>, <code>pandoc</code>, <code>pycco</code>.
+
+<p>Editting tools:
+<code>vim8</code> with <code>Nerdtree</code> and other cool tools.
+<p>File management tools:
+<code>mc</code>, <code>tree</code>, <code>wget</code>.
+
+<p>Fun:
+<code>bsdgames</code>, <code>cmatric</code>, <code>asciiquarium</code>.
+
+<p>Languages:
+<code>clisp</code>, <code>gawk</code>, <code>gnu-smalltalk</code>, <code>javascript</code>, <code>haskell</code>, <code>lua</code>, <code>luajit</code>, <code>python</code>, <code>python3</code>, <code>swi-prolog</code>.
+
+<p>Plotting:
+<code>gnuplot</code>.
+
+<p>Programming utilities:
+<code>pip</code>,
+<code>ctag</code>.
+
+<p>Session management tools:
+<code>tmux</code>.
+
+<p>System monitoring:
+<code>htop</code>, <code>ncdu</code>, <code>pfyd</code>.
+
+</td>
+</tr></table>
 
 ## How to Use
 
