@@ -49,6 +49,7 @@ The second window shows for text games in four panes:
 
 ### A Better Shell
 
+- Syntax highlighting added to the `less` pager
 - Command line prompts that show:
      - current git branch
      - just the top 3 directories 
