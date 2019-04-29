@@ -61,6 +61,7 @@ pathadd() {
           export PATH="${PATH:+"$PATH:"}$1"
       fi
 }
+mkdir -p      $HOME/.config/htop
 if [ ! -f    "$HOME/.config/htop/htoprc" ]
 then cat<<EOF>$HOME/.config/htop/htoprc
 fields=0 48 46 47 49 1

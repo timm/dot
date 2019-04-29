@@ -71,11 +71,12 @@ vundle() {
 }
 
 set -x
-files; os;
-lots; fun;
-julia11
-vim8; vundle
-sudo apt autoclean
-sudo apt clean
-sudo apt autoremove
+#files; os;
+#lots; fun;
+#julia11
+#vim8; 
+vundle
+#sudo apt autoclean
+#sudo apt clean
+#sudo apt autoremove
 set +x 
