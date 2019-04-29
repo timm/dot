@@ -1,8 +1,22 @@
 <img align=right src="http://gentlebytes.com/images/home/product-appledoc.png" width=300>
 
-# Timm's NCSU VCL set up
+# _timmnix18 :  useful tools for NCSU VCL 
 
-In NCSU's VCL facility:
+`_timmnix18` is an NCSU VCL image preconfigured with many useful tools. 
+
+To use the image, first select "_timmnix18_" from the reservations menu:
+
+<center><a href="reserve.png"><img src="reserve.png" width=900></a></center>
+
+Next, go to your persistent file storage, download the main config file, and run it:
+
+XXX needs work
+
+```sh
+wget 
+```
+It was created since,
+at  NCSU's VCL facility:
 
 - Every time you log back into an image to `$HOME`, its a fresh copy of that image;
 - So for persistent file storage, VCL users have a separate file storage space over in (e.g.) `/afs/unity.ncsu.edu/users/t/tjmenzie`. 
@@ -10,6 +24,7 @@ In NCSU's VCL facility:
 This makes installations... interesting. The following code adds lots of cool tools, 
 then ensures that all their
 config files are in your permanent file storage space (e.g.) `/afs/unity.ncsu.edu/users/t/tjmenzie/.config`.
+
 
 
 ## What this gives you
