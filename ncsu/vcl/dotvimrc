@@ -10,7 +10,7 @@ set backspace=indent,eol,start
 
 set nobackup
 set noswapfile
-set directory=$HOME/tmp
+set directory=$Tnix/tmp
 set hlsearch
 set ignorecase
 set incsearch
@@ -71,7 +71,7 @@ endif
 
 set nocompatible
 filetype off
-set rtp+=$Dot/vim/bundle/Vundle.vim
+set rtp+=$Tnix/.config/vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'

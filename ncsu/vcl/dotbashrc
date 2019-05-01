@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-mkdir -p $HOME/tmp
+export Tnix="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
 
-export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
-
-. $Dot/git0
 
 _c0="\033[00m"     # white
 _c1="\033[01;32m"  # green
@@ -16,11 +13,10 @@ _c7="\033[36m"     # turquoise
 
 here() { cd $1; basename "$PWD"; }
 
-PROMPT_COMMAND='echo -ne "${_c7}[Ti18]${_c0}:$(hostname -s)${_c6}$(git branch 2>/dev/null | grep '^*' | colrm 1 2) \033]0;$(here ../..)/$(here ..)/$(here .)\007";PS1="${_c1}$(here ../..)/$_c2$(here ..)/$_c3$(here .) ${_c6}\!>${_c0}\e[m "'
+PROMPT_COMMAND='echo -ne "${_c7}[Tnix]${_c0}:$(hostname -s)${_c6}$(git branch 2>/dev/null | grep '^*' | colrm 1 2) \033]0;$(here ../..)/$(here ..)/$(here .)\007";PS1="${_c1}$(here ../..)/$_c2$(here ..)/$_c3$(here .) ${_c6}\!>${_c0}\e[m "'
 
 
 alias egrep='egrep --color=auto'
-alias eos="cd $Dot/.."
 alias fgrep='fgrep --color=auto'
 alias gc="git config credential.helper 'cache --timeout=3600'"
 alias get='git pull'
@@ -29,15 +25,8 @@ alias ls='ls --color'
 alias matrix="cmatrix -b -u 6"
 alias mc='mc -x -S gotar.ini'
 alias put='gc; git commit -am saving; git push; git status'
-alias tmux="cd $Dot/..; tmux -f $Dot/dottmux"
-alias vi="vim -u $Dot/dotvimrc"
-
-bashing() {
-  Bashrc=$Dot/dotbashrc
-  There=$HOME/.bashrc
-  (grep ". $Bashrc" $There || echo ". $Bashrc" >> $There )>/dev/null
-}
-
+alias tmux="tmux -f $Tnix/.config/dottmux"
+alias vi="vim -u $Tnix/.config/dotvimrc"
 
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS='--quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4 -R '
@@ -49,46 +38,9 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-commit() {
-	(cd $Dot/../gits/timm/dot/ncsu/vcl
-	cp $Dot/* .
-	git add *
-	git commit -am saving
-	git push)
-}
 pathadd() {
       if  [[ ":$PATH:" != *":$1:"* ]]; then
           export PATH="${PATH:+"$PATH:"}$1"
       fi
 }
-mkdir -p      $HOME/.config/htop
-if [ ! -f    "$HOME/.config/htop/htoprc" ]
-then cat<<EOF>$HOME/.config/htop/htoprc
-fields=0 48 46 47 49 1
-sort_key=46
-sort_direction=1
-hide_threads=0
-hide_kernel_threads=1
-hide_userland_threads=0
-shadow_other_users=0
-show_thread_names=0
-show_program_path=1
-highlight_base_name=0
-highlight_megabytes=1
-highlight_threads=1
-tree_view=0
-header_margin=1
-detailed_cpu_time=0
-cpu_count_from_zero=0
-update_process_names=0
-account_guest_in_cpu_meter=0
-color_scheme=0
-delay=15
-left_meters=AllCPUs Memory Swap Uptime
-left_meter_modes=1 1 1 2
-right_meters=Clock Hostname
-right_meter_modes=4 2
-EOF
-fi
 pathadd ../bin
-bashing

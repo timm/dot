@@ -128,4 +128,4 @@ set -g message-bg colour16
 
 ############################################
 # layouts
-bind S source-file $Dot/tmux-session1
+bind S source-file $Tnix/.config/tmux-session1

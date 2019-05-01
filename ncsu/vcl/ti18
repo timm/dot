@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-export Dot="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
-Here=$(pwd)
-
-cd $Dot
-bash ./dotbashrc
-. $HOME/.bashrc
-cd $Here
