@@ -1,9 +1,16 @@
 #!/bin/bash
 
-export Tnix="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER"
-. $HOME/.bashrc
-cd $Tnix
-if [ -n "$1" ]; then 
-  cd .config
-  sudo make -f tnix.mk $1
-fi
+Tnix="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER"
+
+todo="$Tnix/.config/dotbashrc"
+
+bashrc="(grep '. /bin/tnix' $HOME/.bashrc || echo . /bin/tnix >> $HOME/.bashrc )>/dev/null"
+
+com="$bashrc; export Tnix=$Tnix;  cd $Tnix ; [ -f \"$todo\" ] && . $todo " 
+
+alias afs="$com"
+
+(grep '. /bin/tnix' $HOME/.bashrc || echo . /bin/tnix >> $HOME/.bashrc )>/dev/null
+export Tnix=$Tnix;  cd $Tnix ; [ -f \"$todo\" ] && . $todo  
+
+
