@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export Tnix="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER/.config"
+export Tnix="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER"
 
 
 _c0="\033[00m"     # white

@@ -1,0 +1,125 @@
+## this code assume that Tnix has been exported
+Julia=1.1.0
+define Apts =
+aptitude aspell build-essential  \
+bsdgames clisp cmatrix ctags gawk gnuplot gnu-smalltalk haskell-platform \
+htop luajit lua5.2 mc ncdu nodejs pandoc python-pip python3 \
+swi-prolog source-highlight tmux tree vim wget 
+endef
+
+Letter=$(shell echo $(USER) | cut -c 1)
+Tnix=$(shell echo "/afs/unity.ncsu.edu/users/$(Letter)/$(USER)")
+
+D=https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl
+A=sudo apt -qq -y 
+C=$(Tnix)/.config
+
+mine: dirs files progs bashrc clean
+
+once: git0 vundle
+
+install: os apts scripts vim0 pythons fish clean
+
+all: install once mine
+
+scripts: 
+	cd $(HOME); \
+	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - ; \
+	sudo npm i -g coffeescript typescript ts-node @types/node
+
+pythons: pip pycco
+
+os:
+	$A update
+	$A upgrade -y
+
+dirs:
+	mkdir -p $C
+	mkdir -p $(Tnix)/tmp
+	mkdir -p $(Tnix)/opt/julia
+
+files: bashrc $C/tnix.sh $C/tnix.mk $C/dotbashrc $C/dottmux $C/dotvimrc $C/tmux-session1 
+
+W=wget -O $@ $D/$@
+$C/tnix.sh       : ; $W
+$C/tnix.mk       : ; $W
+$C/dothtop       : ; $W
+$C/dotbashrc     : ; $W
+$C/dottmux       : ; $W
+$C/dotvimrc      : ; $W
+$C/tmux-session1 : ; $W
+
+X=$C/dotbashrc
+Y=$(HOME)/.bashrc
+TN=export Tnix='$(Tnix)'
+bashrc:
+	(grep ". $X" $Y || echo ". $X" >> $Y )>/dev/null
+	(grep "$(TN)" $Y || echo "$(TN)" >> $Y )>/dev/null
+
+
+progs:  $(HOME)/.config/htop/htoprc $(Tnix)/opt/julia/julia-$(Julia)
+
+	
+
+$(HOME)/.config/htop/htoprc:
+	mkdir $(dir $@)
+	cp $C/dothtop $@
+
+$(Tnix)/opt/julia/julia-$(Julia):
+	mkdir -p $@/bin
+	cd $@
+	wget -O julia$(Julia).tar.gz https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-$(Julia)-linux-x86_64.tar.gz
+	tar xzf julia$(Julia).tar.gz
+
+git0:
+	git config --global user.email "$(shell bash -c 'read  -p Enter_your_git_user_email\  ; echo $$REPLY')"
+	git config --global user.name  "$(shell bash -c 'read  -p Enter_your_git_user_name\   ; echo $$REPLY')"
+
+apts:
+	$A install $(Apts)
+	sudo aptitude install npm
+
+pip:
+	if [ ! `which pip` ]>&2; then \
+     		curl https://bootstrap.pypa.io/get-pip.py -o $(HOME)/get-pip.py; \
+     		python $(HOME)/get-pip.py; \
+     		rm $(HOME)/get-pip.py; \
+  	fi
+	sudo -H pip install --upgrade pip
+
+pycco:
+	sudo -H pip install pycco
+
+fish:
+	if [ ! `which asciiquarium` ]>&2; then \
+    		sudo add-apt-repository -y ppa:ytvwld/asciiquarium > /dev/null; \
+    		$A update; \
+		$A install asciiquarium; \
+  	fi
+
+vim0:
+	sudo add-apt-repository   -y ppa:jonathonf/vim > /dev/null
+	$A update
+	$A upgrade vim
+
+V=$C/vim/bundle
+
+vundle: $C/dotvimrc
+	if [ ! -d "$V" ]; then \
+    		mkdir -p $V ;\
+    		git clone https://github.com/gmarik/Vundle.vim.git $V; \
+  	fi
+	-vim  -u "$C/dotvimrc" +PluginInstall +qall 
+
+clean:
+	sudo apt autoclean
+	sudo apt clean
+	sudo apt autoremove
+
+commit: files
+	cd $(Tnix)/gits/timm/dot/ncsu/vcl; \
+	cp $C/* . ; \
+	git add * ; \
+	git commit -am saving; \
+	git push
+
