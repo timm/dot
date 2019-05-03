@@ -1,6 +1,13 @@
 #!/bin/bash
 
 Tnix="/afs/unity.ncsu.edu/users/$(echo $USER | cut -c 1)/$USER"
+Web=https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl/tnix.mk
+
+mkdir -p $Tnix/.config
+
+if [ ! -f "$Tnix/.config/tnix.mk" ]; then
+  wget -O $Tnix/.config/tnix.mk  $Web/tnix.mk
+fi
 
 todo="$Tnix/.config/dotbashrc"
 
@@ -11,6 +18,9 @@ com="$bashrc; export Tnix=$Tnix;  cd $Tnix ; [ -f \"$todo\" ] && . $todo "
 alias afs="$com"
 
 (grep '. /bin/tnix' $HOME/.bashrc || echo . /bin/tnix >> $HOME/.bashrc )>/dev/null
-export Tnix=$Tnix;  cd $Tnix ; [ -f \"$todo\" ] && . $todo  
 
+export Tnix=$Tnix;  cd $Tnix ; [ -f "$todo" ] && . $todo  
 
+if [ -n "$*" ]; then
+  (cd $Tnix/.config; make -f tnix.mk $*)
+fi
