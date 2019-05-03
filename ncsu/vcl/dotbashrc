@@ -21,6 +21,7 @@ alias fgrep='fgrep --color=auto'
 alias gc="git config credential.helper 'cache --timeout=3600'"
 alias get='git pull'
 alias grep='grep --color=auto'
+alias julia='/afs/unity.ncsu.edu/users/t/tjmenzie/opt/julia/julia-1.1.0/bin/julia'
 alias ls='ls --color'
 alias matrix="cmatrix -b -u 6"
 alias mc='mc -x -S gotar.ini'
@@ -38,6 +39,9 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
+cless () { 
+  pygmentize -f terminal "$1" | less -R 
+}
 pathadd() {
       if  [[ ":$PATH:" != *":$1:"* ]]; then
           export PATH="${PATH:+"$PATH:"}$1"

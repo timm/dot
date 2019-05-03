@@ -40,7 +40,7 @@ scripts:
 	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - ; \
 	sudo npm i -g coffeescript typescript ts-node @types/node
 
-pythons: pip pycco
+pythons: pip pycco pygments
 
 os:
 	$A update
@@ -91,6 +91,9 @@ pip:
 
 pycco:
 	sudo -H pip install pycco
+
+pygments:
+	sudo -H pip install pygments
 
 fish:
 	if [ ! `which asciiquarium` ]>&2; then \
