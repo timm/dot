@@ -145,7 +145,7 @@ tnix help
 - _tnix vim8_ : install some vim8 tools
 - _tnix commit_ :  a sysadmin trick (saves the config files to `github.com/timm/dot/`
 
-###: Test
+### Test
 
 1. Run the command `tmux`. Ignore any errors you see.
 2. Press control-space. Then press shift-S. You should then see something like the above screenshots.
