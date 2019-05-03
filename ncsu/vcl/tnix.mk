@@ -24,7 +24,7 @@ help: tnix.mk
 	@sed -n 's/^## //p' $<
 
 ## update   : Quick updates (do regularly)
-update: os dirs files progs bashrc clean
+update: os dirs files progs clean
 
 ## once     : Some quick updates (to do once)
 once: git0 vundle
@@ -51,10 +51,9 @@ dirs:
 	mkdir -p $(Tnix)/tmp
 	mkdir -p $(Tnix)/opt/julia
 
-files: bashrc $C/tnix.sh $C/tnix.mk $C/dotbashrc $C/dottmux $C/dotvimrc $C/tmux-session1 
+files: $C/tnix.mk $C/dotbashrc $C/dottmux $C/dotvimrc $C/tmux-session1 
 
 W=wget -O $@ $D/$@
-$C/tnix.sh       : ; $W
 $C/tnix.mk       : ; $W
 $C/dothtop       : ; $W
 $C/dotbashrc     : ; $W
@@ -62,16 +61,10 @@ $C/dottmux       : ; $W
 $C/dotvimrc      : ; $W
 $C/tmux-session1 : ; $W
 
-X=/bin/tnix
-Y=$(HOME)/.bashrc
-bashrc:
-	(grep ". $X" $Y || echo ". $X" >> $Y )>/dev/null
-
-progs:  $(HOME)/.config/htop/htoprc $(Tnix)/opt/julia/julia-$(Julia)
-
+progs: $(HOME)/.config/htop/htoprc $(Tnix)/opt/julia/julia-$(Julia)
 
 $(HOME)/.config/htop/htoprc:
-	mkdir $(dir $@)
+	mkdir -p $(dir $@)
 	cp $C/dothtop $@
 
 $(Tnix)/opt/julia/julia-$(Julia):
