@@ -1,33 +1,29 @@
 <img align=right src="http://gentlebytes.com/images/home/product-appledoc.png" width=300>
 
-# _timmnix18 :  useful tools for NCSU VCL 
+# _tnix :  useful tools for NCSU VCL 
 
-`_timmnix18` is an NCSU VCL image preconfigured with many useful tools. 
+`_tnix` is an NCSU VCL image preconfigured with many useful tools. 
 
-To use the image, first select "_timmnix18_" from the reservations menu:
+To use the image, first select "_tnix" from the reservations menu:
 
 <center><a href="reserve.png"><img src="reserve.png" width=900></a></center>
 
-Next, go to your persistent file storage, download the main config file, and run it:
-
-XXX needs work
+Once you login, type..
 
 ```sh
-wget 
+. tnix
 ```
-It was created since,
-at  NCSU's VCL facility:
 
-- Every time you log back into an image to `$HOME`, its a fresh copy of that image;
-- So for persistent file storage, VCL users have a separate file storage space over in (e.g.) `/afs/unity.ncsu.edu/users/t/tjmenzie`. 
+## Why TNIX?
 
-This makes installations... interesting. The following code adds lots of cool tools, 
+Every time you log back into a VCL 
+image to `$HOME`, its a fresh copy of that image.
+This makes installations... interesting. So my _tnix_ image
+adds lots of cool tools, 
 then ensures that all their
 config files are in your permanent file storage space (e.g.) `/afs/unity.ncsu.edu/users/t/tjmenzie/.config`.
 
-
-
-## What this gives you
+## What this gives you?
 
 ### A Better Work Environment (with Tmux)
 
@@ -130,59 +126,26 @@ Run the install instructions, below. Only do that once
 Then, each time you log in, in the log directory, run...
 
 ```sh
-. $HOME/timmnix
+. tnix
 ```
 
-## Installation (Only Do Once)
-
-In this install, all config files are written to EOS space
-(since, in VCL, everything in the login directories are reset every login).
-
-### Step1: Set up git
+Other options can be accessed via
 
 ```sh
-# replace UPPER case words with your details
-# e.g. git config --global user.name "Tim Menzies"
-# e.g. git config --global user.email "timm@ieee.org"
-
-git config --global user.name "FIRST_NAME LAST_NAME"
-git config --global user.email "MY_NAME@EXAMPLE.COM"
-git config --global push.default simple
+tnix help
 ```
 
-### Step2: Cd into your eos file space. 
+`tnix` offers some useful verbs:
 
-```sh
-# replace U/USERNAME with 1st letter of username, then username
-# e.g. cd /afs/unity.ncsu.edu/users/t/tjmenzie
+- _tnix os_ :  update and upgrade all
+- _tnix update_ : stuff to do a lot (e.g. daily)
+- _tnix once_ :   stuff to do once
+- _tnix insall_  : stuff not to do (unless you can save an image)
+- _tnix all_ : do everthing (but don't use if you cannot save the image)
+- _tnix vim8_ : install some vim8 tools
+- _tnix commit_ :  a sysadmin trick (saves the config files to `github.com/timm/dot/`
 
-cd /afs/unity.ncsu.edu/users/U/USERNAME
-```
-
-### Step3: For the conf directory:
-
-- First make that director
-- Then download timmnix.sh
-- Then run `timmnix.sh`
-
-```sh
-mkdir .config
-cd .config
-wget -O timmnix.sh https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl/timmnix.sh
-bash timmnix.sh
-```
-
-If you see something like the following errors, just ignore them:
-
-- E: Unable to change to /afs/unity.ncsu.edu/users/t/tjmenzie/.config/ - chdir (13: Permission denied)
-- DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020.
-
-### Step4: Then relaunch bash to get everything 
-
-- Log out then login again
-- Or do `. $HOME/.bashrc`
-
-### Step5: Test
+###: Test
 
 1. Run the command `tmux`. Ignore any errors you see.
 2. Press control-space. Then press shift-S. You should then see something like the above screenshots.
