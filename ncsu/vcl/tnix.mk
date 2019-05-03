@@ -1,4 +1,10 @@
-## this code assume that Tnix has been exported
+## Tnix v1 : VCL image management tool
+## (c) 2019, Tim Menzies, timm@ieee.org
+##     
+## usage: . tnix    (quick set up)
+##        tnix help (list commands)
+##        tnix com  (run 1 com)
+##      
 Julia=1.1.0
 define Apts =
 aptitude aspell build-essential  \
@@ -14,13 +20,20 @@ D=https://raw.githubusercontent.com/timm/dot/master/ncsu/vcl
 A=sudo apt -qq -y 
 C=$(Tnix)/.config
 
-mine: dirs files progs bashrc clean
+help: tnix.mk
+	@sed -n 's/^## //p' $<
 
+## update   : Quick updates (do regularly)
+update: os dirs files progs bashrc clean
+
+## once     : Some quick updates (to do once)
 once: git0 vundle
 
+## install  : Slow updates (skip if do not cannot save image)
 install: os apts scripts vim0 pythons fish clean
 
-all: install once mine
+## all      : Shorthand for install, once, update
+all: install once update
 
 scripts: 
 	cd $(HOME); \
@@ -49,17 +62,13 @@ $C/dottmux       : ; $W
 $C/dotvimrc      : ; $W
 $C/tmux-session1 : ; $W
 
-X=$C/dotbashrc
+X=/bin/tnix
 Y=$(HOME)/.bashrc
-TN=export Tnix='$(Tnix)'
 bashrc:
 	(grep ". $X" $Y || echo ". $X" >> $Y )>/dev/null
-	(grep "$(TN)" $Y || echo "$(TN)" >> $Y )>/dev/null
-
 
 progs:  $(HOME)/.config/htop/htoprc $(Tnix)/opt/julia/julia-$(Julia)
 
-	
 
 $(HOME)/.config/htop/htoprc:
 	mkdir $(dir $@)
@@ -97,6 +106,9 @@ fish:
 		$A install asciiquarium; \
   	fi
 
+## vim8     : Install Vim8 stuff
+vim8: vim0 vundle
+
 vim0:
 	sudo add-apt-repository   -y ppa:jonathonf/vim > /dev/null
 	$A update
@@ -116,8 +128,10 @@ clean:
 	sudo apt clean
 	sudo apt autoremove
 
+## commit   : Secret stuff, for me
 commit: files
 	cd $(Tnix)/gits/timm/dot/ncsu/vcl; \
+	cp /bin/tnix . ; \
 	cp $C/* . ; \
 	git add * ; \
 	git commit -am saving; \
