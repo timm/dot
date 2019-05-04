@@ -30,7 +30,7 @@ update: os dirs files progs clean
 once: git0 vundle
 
 ## install  : Slow updates (skip if do not cannot save image)
-install: os apts scripts vim0 pythons fish clean
+install: os apts scripts vim0 pythons fish hollywood clean
 
 ## all      : Shorthand for install, once, update
 all: install once update
@@ -101,6 +101,11 @@ fish:
     		$A update; \
 		$A install asciiquarium; \
   	fi
+
+hollywood:
+	sudo apt-add-repository ppa:hollywood/ppa
+	$A update
+	$A install hollywood
 
 ## vim8     : Install Vim8 stuff
 vim8: vim0 vundle
