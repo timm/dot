@@ -30,10 +30,15 @@ update: os dirs files progs clean
 once: git0 vundle
 
 ## install  : Slow updates (skip if do not cannot save image)
-install: os apts scripts vim0 pythons fish hollywood clean
+install: os apts scripts vim0 pythons silly clean
 
+	
 ## all      : Shorthand for install, once, update
-all: install once update
+all: install once update 
+
+## silly    : Waste much time with silly things
+silly: fish hollywood cowsay
+	$A install bsdgames
 
 scripts: 
 	cd $(HOME); \
@@ -106,6 +111,11 @@ hollywood:
 	sudo apt-add-repository ppa:hollywood/ppa
 	$A update
 	$A install hollywood
+
+cowsay:
+	$A install cowsay
+	$A install fortune-mod
+
 
 ## vim8     : Install Vim8 stuff
 vim8: vim0 vundle
