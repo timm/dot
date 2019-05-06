@@ -103,7 +103,8 @@ set -g status-fg colour137
 set -g status-attr dim
 set -g status-left ''
 #set -g status-right '#[fg=colour233,bg=colour19,bold] %d/%m #[fg=colour233,bg=colour8,bold] %H:%M:%S '
-set -g status-right '#[fg=colour233,bg=colour19,bold] %d/%m #[fg=colour233,bg=colour8,bold] %H:%M '
+#set -g status-right '#[fg=colour233,bg=colour19,bold] %d/%m #[fg=colour233,bg=colour8,bold] %H:%M '
+ set -g status-right '#{?window_zoomed_flag,🔍,} #[fg=colour255,bold]#H #[fg=colour255,bg=colour19,bold] %d/%m #[fg=colour255,bg=colour8,bold] %H:%M '
 set -g status-right-length 50
 set -g status-left-length 20
 
@@ -129,3 +130,5 @@ set -g message-bg colour16
 ############################################
 # layouts
 bind S source-file $Tnix/.config/tmux-session1
+setw -g monitor-activity on
+set -g visual-activity on
