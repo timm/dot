@@ -1,0 +1,30 @@
+; -*- mode: emacs-lisp; -*-
+(progn
+  (global-font-lock-mode t)
+  (global-hl-line-mode 1)
+  (load-theme  'wombat)
+  (setq column-number-mode t)
+  (setq inhibit-startup-message t)
+  (setq make-backup-files nil) 
+  (setq scroll-step 1)
+  (setq-default fill-column 52)
+  (setq-default indent-tabs-mode nil)
+  (show-paren-mode t)
+  (transient-mark-mode t)
+  (xterm-mouse-mode t)
+  )
+
+;; adwaita
+;; deeper-blue
+;; dichromacy
+;; light-blue
+;; manoj-dark
+;; misterioso
+;; tango
+;; tango-dark
+;; tsdh-dark
+;; tsdh-light
+;; wheatgrass
+;; whiteboard
+;; wombat
+
