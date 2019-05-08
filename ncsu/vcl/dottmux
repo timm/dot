@@ -24,7 +24,7 @@ unbind %
 bind c new-window -c "#{pane_current_path}"
 
 # reload config file
-bind r source-file ~/.tmux.conf
+bind r source-file $Tnix/.config/dottmux
 
 unbind p
 bind p previous-window
@@ -104,7 +104,7 @@ set -g status-attr dim
 set -g status-left ''
 #set -g status-right '#[fg=colour233,bg=colour19,bold] %d/%m #[fg=colour233,bg=colour8,bold] %H:%M:%S '
 #set -g status-right '#[fg=colour233,bg=colour19,bold] %d/%m #[fg=colour233,bg=colour8,bold] %H:%M '
- set -g status-right '#{?window_zoomed_flag,🔍,} #[fg=colour255,bold]#H #[fg=colour255,bg=colour19,bold] %d/%m #[fg=colour255,bg=colour8,bold] %H:%M '
+ set -g status-right '#{?window_zoomed_flag,🔍,} #[fg=colour255,bold]#H #[fg=colour255,bg=colour19,bold] %b %d #[fg=colour255,bg=colour8,bold] %H:%M '
 set -g status-right-length 50
 set -g status-left-length 20
 

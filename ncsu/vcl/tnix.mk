@@ -8,9 +8,9 @@
 Julia=1.1.0
 define Apts =
 aptitude aspell build-essential  \
-bsdgames clisp cmatrix ctags gawk gnuplot gnu-smalltalk haskell-platform \
+bsdgames clisp cmatrix ctags emacs gawk gnuplot gnu-smalltalk haskell-platform \
 htop luajit lua5.2 mc ncdu nodejs pandoc python-pip python3 \
-swi-prolog source-highlight tmux tree vim wget 
+slime sbcl swi-prolog source-highlight tmux tree vim wget 
 endef
 
 Letter=$(shell echo $(USER) | cut -c 1)
