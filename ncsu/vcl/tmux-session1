@@ -1,8 +1,8 @@
 send-keys  "bash -i" C-m
-split-window -h -p 33 "htop"
-split-window -v -p 83 "bash -i"
-send-keys "matrix" C-m
-split-window "mc -x -S gotar.ini"
+split-window -h -p 30 "htop"
+split-window -v -p 90 "bash -i"
+send-keys "asciiquarium" C-m
+split-window -v 40 "mc -x -S gotar.ini"
 rename-window "main"
 new-window 
 rename-window "news"

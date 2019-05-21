@@ -32,8 +32,9 @@ set splitbelow
 set title
 set ttyfast
 set visualbell
-"set number
+set number
 set wrap
+set paste
 
 set matchpairs+=<:>
 

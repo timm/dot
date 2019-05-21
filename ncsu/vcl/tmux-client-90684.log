@@ -1,0 +1,61 @@
+1558203056.757435 client started (90684): version 2.6, socket /tmp/tmux-156694/default, protocol 8
+1558203056.757581 on Linux 4.15.0-48-generic #51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019; libevent 2.1.8-stable (poll)
+1558203056.757631 socket is /tmp/tmux-156694/default
+1558203056.757663 trying connect
+1558203056.757698 connect failed: Connection refused
+1558203056.757725 lock file is /tmp/tmux-156694/default.lock
+1558203056.757855 flock succeeded
+1558203056.757882 got lock (6)
+1558203056.757905 trying connect
+1558203056.757934 connect failed: Connection refused
+1558203056.758190 add peer 0x55ac70583e80: 7 ((nil))
+1558203056.758340 sending message 100 to peer 0x55ac70583e80 (4 bytes)
+1558203056.758387 sending message 101 to peer 0x55ac70583e80 (15 bytes)
+1558203056.758438 sending message 102 to peer 0x55ac70583e80 (11 bytes)
+1558203056.758463 sending message 108 to peer 0x55ac70583e80 (45 bytes)
+1558203056.758485 sending message 104 to peer 0x55ac70583e80 (0 bytes)
+1558203056.758506 sending message 107 to peer 0x55ac70583e80 (4 bytes)
+1558203056.758533 sending message 105 to peer 0x55ac70583e80 (1516 bytes)
+1558203056.758564 sending message 105 to peer 0x55ac70583e80 (51 bytes)
+1558203056.758587 sending message 105 to peer 0x55ac70583e80 (34 bytes)
+1558203056.758606 sending message 105 to peer 0x55ac70583e80 (17 bytes)
+1558203056.758626 sending message 105 to peer 0x55ac70583e80 (141 bytes)
+1558203056.758645 sending message 105 to peer 0x55ac70583e80 (44 bytes)
+1558203056.758665 sending message 105 to peer 0x55ac70583e80 (28 bytes)
+1558203056.758684 sending message 105 to peer 0x55ac70583e80 (21 bytes)
+1558203056.758703 sending message 105 to peer 0x55ac70583e80 (21 bytes)
+1558203056.758722 sending message 105 to peer 0x55ac70583e80 (14 bytes)
+1558203056.758744 sending message 105 to peer 0x55ac70583e80 (33 bytes)
+1558203056.758763 sending message 105 to peer 0x55ac70583e80 (49 bytes)
+1558203056.758782 sending message 105 to peer 0x55ac70583e80 (20 bytes)
+1558203056.758801 sending message 105 to peer 0x55ac70583e80 (21 bytes)
+1558203056.758820 sending message 105 to peer 0x55ac70583e80 (34 bytes)
+1558203056.758840 sending message 105 to peer 0x55ac70583e80 (42 bytes)
+1558203056.758859 sending message 105 to peer 0x55ac70583e80 (65 bytes)
+1558203056.758879 sending message 105 to peer 0x55ac70583e80 (24 bytes)
+1558203056.758898 sending message 105 to peer 0x55ac70583e80 (24 bytes)
+1558203056.758917 sending message 105 to peer 0x55ac70583e80 (21 bytes)
+1558203056.758935 sending message 105 to peer 0x55ac70583e80 (19 bytes)
+1558203056.758955 sending message 105 to peer 0x55ac70583e80 (42 bytes)
+1558203056.758974 sending message 105 to peer 0x55ac70583e80 (24 bytes)
+1558203056.758993 sending message 105 to peer 0x55ac70583e80 (20 bytes)
+1558203056.759012 sending message 105 to peer 0x55ac70583e80 (16 bytes)
+1558203056.759032 sending message 105 to peer 0x55ac70583e80 (8 bytes)
+1558203056.759052 sending message 105 to peer 0x55ac70583e80 (17 bytes)
+1558203056.759071 sending message 105 to peer 0x55ac70583e80 (56 bytes)
+1558203056.759091 sending message 105 to peer 0x55ac70583e80 (33 bytes)
+1558203056.759110 sending message 105 to peer 0x55ac70583e80 (21 bytes)
+1558203056.759129 sending message 105 to peer 0x55ac70583e80 (24 bytes)
+1558203056.759148 sending message 105 to peer 0x55ac70583e80 (124 bytes)
+1558203056.759167 sending message 105 to peer 0x55ac70583e80 (65 bytes)
+1558203056.759187 sending message 105 to peer 0x55ac70583e80 (16 bytes)
+1558203056.759206 sending message 105 to peer 0x55ac70583e80 (16 bytes)
+1558203056.759225 sending message 106 to peer 0x55ac70583e80 (0 bytes)
+1558203056.759244 sending message 200 to peer 0x55ac70583e80 (4 bytes)
+1558203056.759262 client loop enter
+1558203056.809113 peer 0x55ac70583e80 message 207
+1558203056.809157 sending message 208 to peer 0x55ac70583e80 (0 bytes)
+1558203062.907855 peer 0x55ac70583e80 message 203
+1558203062.907898 sending message 205 to peer 0x55ac70583e80 (0 bytes)
+1558203062.909049 peer 0x55ac70583e80 message 204
+1558203062.909099 client loop exit
